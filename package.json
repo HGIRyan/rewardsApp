@@ -9,9 +9,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
-    "env": "0.0.2",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "massive": "^4.7.1",
+    "nodemon": "^1.17.2",
     "react": "^16.3.0-alpha.1",
     "react-native": "0.54.3"
   },
@@ -23,7 +24,5 @@
   },
   "jest": {
     "preset": "react-native"
-  },
-  "main": "server/server.js",
-  "proxy": "http://localhost:3050"
+  }
 }
