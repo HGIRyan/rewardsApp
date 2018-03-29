@@ -12,10 +12,10 @@ export default class OrderConfirm extends Component {
                 <Text>
                     OrderConfirm Screen
                 </Text>
-                <Button onPress={ }>
+                <Button>
                     Pay with Card
                 </Button>
-                <Button onPress={ }>
+                <Button >
                     Redeem with Points
                 </Button>
 
