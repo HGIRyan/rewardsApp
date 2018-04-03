@@ -25,13 +25,15 @@ export const OrderStack = StackNavigator({
     },
 });
 
+// resource for this found at https://www.youtube.com/watch?v=C96piR3FRww or https://hackernoon.com/getting-started-with-react-navigation-the-navigation-solution-for-react-native-ea3f4bd786a4
+
 export const Tabs = TabNavigator({
     Home: {
         screen: Home,
         navigationOptions: {
             tabBarLabel: 'Home',
             tabBarIcon: ({ tintColor }) => <Image source={homeIcon} name='home' size={15} color={tintColor} />
-            
+
         }
     },
     Order: {

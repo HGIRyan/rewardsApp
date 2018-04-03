@@ -8,10 +8,18 @@ export default class Account extends Component {
     render() {
         return(
             <View>
-                <Text>
+                <Text style={styles.headerText} >
                     Account Component
                 </Text>
             </View>
         )
+    }
+}
+
+const styles = {
+    headerText: {
+        fontSize: 30,
+        color: 'red',
+        padding: 15
     }
 }

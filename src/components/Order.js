@@ -13,7 +13,7 @@ export default class Order extends Component {
     render() {
         return(
             <View>
-                <Text>
+                <Text style={styles.headerText} >
                     Order Component
                 </Text>
                 <Button onPress={ () => this.goToOrderConfirm() }>
@@ -21,5 +21,13 @@ export default class Order extends Component {
                 </Button>
             </View>
         )
+    }
+}
+
+const styles = {
+    headerText: {
+        fontSize: 30,
+        color: 'red',
+        padding: 15
     }
 }
