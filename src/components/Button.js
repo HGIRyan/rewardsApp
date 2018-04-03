@@ -1,13 +1,14 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { ButtonPush, ButtonText } from '../../styles/Buttons';
 
 const Button = ({ onPress, children }) => {
     return(
-        <TouchableOpacity  onPress={onPress} style={ styles.buttonStyle } >
-            <Text style={ styles.textStyle } >
+        <ButtonPush  onPress={onPress}  >
+            <ButtonText>
                 { children }
-            </Text>
-        </TouchableOpacity>
+            </ButtonText>
+        </ButtonPush>
     )
 }
 
@@ -15,7 +16,7 @@ const styles =  {
     buttonStyle: {
         // flex: 1,   this forces it to fill the whole screen/view height
         height: 40,
-        alignSelf: 'stretch',
+        // alignSelf: 'stretch',
         backgroundColor: '#fff',
         borderRadius: 5,
         borderWidth: 1,

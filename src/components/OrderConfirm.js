@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Button from './Button';
+import { MainHeading } from '../../styles/Texts';
 
 export default class OrderConfirm extends Component {
 
@@ -9,9 +10,9 @@ export default class OrderConfirm extends Component {
     render() {
         return(
             <View>
-                <Text>
-                    OrderConfirm Screen
-                </Text>
+                <MainHeading >
+                    Order Confirmation Screen
+                 </MainHeading>
                 <Button>
                     Pay with Card
                 </Button>

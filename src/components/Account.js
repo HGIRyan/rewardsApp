@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Button from './Button';
+import { MainHeading } from '../../styles/Texts';
 
 export default class Account extends Component {
 
@@ -19,9 +20,9 @@ export default class Account extends Component {
     render() {
         return(
             <View>
-                <Text style={styles.headerText} >
-                    Account Component
-                </Text>
+                <MainHeading >
+                    Account Information
+                </MainHeading>
            
             <Button onPress={ () => this.goToAccountSettings() }>
                 Edit Account Info

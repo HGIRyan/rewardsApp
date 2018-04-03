@@ -1,24 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { MainHeading } from '../../styles/Texts';
 
 const Home = () => {
     console.log('home component')
     return(
     <View>
-        <Text style={styles.headerText} >
+        <MainHeading >
             Home Page
-        </Text>
+        </MainHeading>
     </View>
     )
-}
-
-const styles = {
-    headerText: {
-        fontSize: 30,
-        color: 'red',
-        padding: 15,
-        alignSelf: 'center'
-    }
 }
 
 export default Home;
