@@ -9,7 +9,7 @@ export default class Account extends Component {
         name: 'name',
         phone: 'phone number',
         email: 'email address',
-        DOB: 'date of birth'
+        DOB: 'MM/DD/YYYY'
     }
 
     render() {
@@ -35,6 +35,10 @@ export default class Account extends Component {
                 <AccountInput 
                     onChangeText={(email) => this.setState({email})}
                     placeholder={this.state.email}>
+                </AccountInput>
+                <AccountInput 
+                    onChangeText={(DOB) => this.setState({DOB})}
+                    placeholder={this.state.DOB}>
                 </AccountInput>
             </View>
         )

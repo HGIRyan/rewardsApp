@@ -17,7 +17,7 @@ export const ButtonText = styled.Text`
 alignSelf: center;
 color: #007aff;
 fontSize: 16px;
-fontWeight: 600;
+font-weight: 600;
 padding: 10px;
 }
 `;
