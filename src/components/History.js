@@ -18,7 +18,8 @@ const styles = {
     headerText: {
         fontSize: 30,
         color: 'red',
-        padding: 15
+        padding: 15,
+        alignSelf: 'center'
     }
 }
 
