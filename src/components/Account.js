@@ -5,13 +5,6 @@ import { MainHeading } from '../../styles/Texts';
 
 export default class Account extends Component {
 
-    state = {
-        name: '',
-        phone: '',
-        email: '',
-        DOB: ''
-    }
-
     goToAccountSettings = () => {
         this.props.navigation.navigate('AccountSettings')
     }
@@ -29,14 +22,5 @@ export default class Account extends Component {
             </Button>
             </View>
         )
-    }
-}
-
-const styles = {
-    headerText: {
-        fontSize: 30,
-        color: 'red',
-        padding: 15,
-        alignSelf: 'center'
     }
 }
