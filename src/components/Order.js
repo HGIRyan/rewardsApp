@@ -12,23 +12,33 @@ export default class Order extends Component {
 
     render() {
         return(
-            <View>
-                <Text style={styles.headerText} >
-                    Order Component
-                </Text>
-                <Button onPress={ () => this.goToOrderConfirm() }>
-                    Click to Confirm Order
-                </Button>
+            <View style={styles.orderContainer} >
+                <View style={styles.buttonViewStyle} >
+                    <Text style={styles.headerText} >
+                        Order Component
+                    </Text>
+                </View>
+                    <Button onPress={ () => this.goToOrderConfirm() }>
+                        Click to Confirm Order
+                    </Button>
+                
             </View>
         )
     }
 }
 
 const styles = {
+    orderContainer: {
+        height: '100%',
+        width: '100%'
+    },
     headerText: {
         fontSize: 30,
         color: 'red',
         padding: 15,
         alignSelf: 'center'
+    },
+    buttonViewStyle: {
+        height: 110
     }
 }

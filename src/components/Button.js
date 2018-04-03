@@ -13,15 +13,16 @@ const Button = ({ onPress, children }) => {
 
 const styles =  {
     buttonStyle: {
-        flex: 1,
-        height: 10,
+        // flex: 1,   this forces it to fill the whole screen/view height
+        height: 40,
         alignSelf: 'stretch',
         backgroundColor: '#fff',
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#007aff',
         marginLeft: 5,
-        marginRight: 5
+        marginRight: 5,
+        marginTop: 10
     },
     textStyle: {
         alignSelf: 'center',
