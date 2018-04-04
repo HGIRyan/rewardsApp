@@ -20,7 +20,7 @@ export const ButtonPush = styled.TouchableOpacity`
 export const ButtonText = styled.Text`
 alignSelf: center;
 color: #007aff;
-fontSize: 16px;
+fontSize: 18px;
 font-weight: 600;
 padding: 10px;
 }
@@ -29,7 +29,7 @@ padding: 10px;
 export const HalfButtonText = styled.Text`
 alignSelf: center;
 color: #fff;
-fontSize: 16px;
+fontSize: 18px;
 font-weight: 700;
 padding: 10px;
 }

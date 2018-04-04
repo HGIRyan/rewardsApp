@@ -8,7 +8,7 @@ border-radius: 5;
 border-width: 1;
 overflow: hidden;
 border-color: #007aff;
-color: #007aff;
+color: #084598;
 font-size: 18px;
 padding: 10px;
 margin-left: 5;

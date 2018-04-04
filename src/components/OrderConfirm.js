@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { View, Text } from 'react-native';
 import Button from './Button';
 import { MainHeading } from '../../styles/Texts';
 import { ButtonContainer } from '../../styles/Buttons';
-import { MainContainer } from '../../styles/Views';
+import { MainContainer, DetailViewContainer } from '../../styles/Views';
 
 
 export default class OrderConfirm extends Component {
@@ -13,8 +14,13 @@ export default class OrderConfirm extends Component {
         return(
             <MainContainer>
                 <MainHeading >
-                    Order Confirmation Screen
+                    Order Details
                  </MainHeading>
+                 <DetailViewContainer >
+                     <Text>
+
+                     </Text>
+                 </DetailViewContainer>
                  <ButtonContainer>
                     <Button>
                         Pay with Card
@@ -28,3 +34,16 @@ export default class OrderConfirm extends Component {
     }
 }
 
+const styles = {
+    OrderDetailView: {
+        height: 360,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        marginLeft: 40,
+        marginRight: 40,
+        shadowColor: '#000',
+        overflow: 'scroll',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: .2
+    }
+}
