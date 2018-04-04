@@ -4,6 +4,7 @@ import Button from './Button';
 import { MainHeading } from '../../styles/Texts';
 import { ButtonContainer } from '../../styles/Buttons';
 import { MainContainer, DetailViewContainer } from '../../styles/Views';
+import OrderDetails from './OrderDetails';
 
 
 export default class OrderConfirm extends Component {
@@ -17,9 +18,7 @@ export default class OrderConfirm extends Component {
                     Order Details
                  </MainHeading>
                  <DetailViewContainer >
-                     <Text>
-
-                     </Text>
+                    <OrderDetails/>
                  </DetailViewContainer>
                  <ButtonContainer>
                     <Button>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Image, View } from 'react-native';
 import { AccountInput } from '../../styles/Inputs';
 import { MainHeading } from '../../styles/Texts';
 import { TwoButtonContainer } from '../../styles/Buttons';
 import HalfButton from './HalfButton';
 import { HalfButtonPush, HalfButtonText } from '../../styles/Buttons';
 import { MainContainer } from '../../styles/Views';
+import profilePic from '../assests/profile.png';
 
 
 
@@ -31,8 +33,11 @@ export default class Account extends Component {
         return(
             <MainContainer>
                 <MainHeading >
-                     Update Account Information
+                     Edit Account Information
                  </MainHeading>
+                 <View style={ styles.profilePic } >
+                    <Image source={profilePic}  />
+                 </View>
                 <AccountInput 
                     onChangeText={(name) => this.setState({name})}
                     placeholder={this.state.name}>
@@ -64,3 +69,11 @@ export default class Account extends Component {
         )
     }
 }
+
+const styles = {
+    profilePic: {
+        alignSelf: 'center',
+        height: 200,
+        width: 200
+    }
+ }
