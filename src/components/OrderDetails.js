@@ -6,15 +6,15 @@ export default class OrderDetails extends Component {
     state = {
         items: [
             {
-                name: 'tacos',
+                name: 'Tacos',
                 price: 8
             },
             {
-                name: 'salad',
+                name: 'Salad',
                 price: 9
             },
             {
-                name: 'chips',
+                name: 'Chips',
                 price: 6
             }
         ]
@@ -23,16 +23,16 @@ export default class OrderDetails extends Component {
 
     render() {
         const itemName = this.state.items.map((items, i) => {
-            return <Text key={i}>{ items.name }</Text>
+            return <Text style={ styles.orderDetailText } key={i}>{ `Item: ${items.name}    Price: $${items.price}` }</Text>
         })
 
         const itemPrice = this.state.items.map((items, i) => {
-            return <Text key={i}>{ items.price }</Text>
+            return <Text style={ styles.orderDetailText }key={i}>{ `$${items.price}` }</Text>
         })
 
 
         return(
-            <View>
+            <View style={ styles.orderContainer } >
             <View>
                 <Text>Item</Text>
                 {itemName}
@@ -44,6 +44,16 @@ export default class OrderDetails extends Component {
             </View>
         )
     }
+}
 
-
+const styles = {
+    orderContainer: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    orderDetailText: {
+        alignSelf: 'center',
+        color: '#084598',
+        marginLeft: 5
+    }
 }
