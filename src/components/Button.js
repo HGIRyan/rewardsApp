@@ -1,35 +1,16 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { ButtonPush, ButtonText } from '../../styles/Buttons';
 
 const Button = ({ onPress, children }) => {
     return(
-        <TouchableOpacity  onPress={onPress} style={ styles.buttonStyle } >
-            <Text style={ styles.textStyle } >
+        <ButtonPush  onPress={onPress}  >
+            <ButtonText>
                 { children }
-            </Text>
-        </TouchableOpacity>
+            </ButtonText>
+        </ButtonPush>
     )
 }
 
-const styles =  {
-    buttonStyle: {
-        flex: 1,
-        height: 10,
-        alignSelf: 'stretch',
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#007aff',
-        marginLeft: 5,
-        marginRight: 5
-    },
-    textStyle: {
-        alignSelf: 'center',
-        color: '#007aff',
-        fontSize: 16,
-        fontWeight: '600',
-        padding: 10
-    }
-}
 
 export default Button;

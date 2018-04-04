@@ -13,7 +13,7 @@ export default class App extends Component {
   render() {
       return(
 
-        <Tabs />
+        <Tabs style={style.tabs} />
       ) 
     }
   }
@@ -34,7 +34,12 @@ export default class App extends Component {
     
   
 
-
+const style = {
+  tabs: {
+    color: 'red',
+    fontSize: 20,
+  }
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
