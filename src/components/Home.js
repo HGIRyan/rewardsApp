@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { MainHeading } from '../../styles/Texts';
+import { MainContainer } from '../../styles/Views';
+
 
 const Home = () => {
     console.log('home component')
     return(
-    <View>
+    <MainContainer>
         <MainHeading >
             Home Page
         </MainHeading>
-    </View>
+    </MainContainer>
     )
 }
 

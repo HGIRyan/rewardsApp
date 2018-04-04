@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
 import Button from './Button';
 import { MainHeading } from '../../styles/Texts';
+import { ButtonContainer } from '../../styles/Buttons';
+import { MainContainer } from '../../styles/Views';
+
 
 export default class OrderConfirm extends Component {
 
@@ -9,18 +11,20 @@ export default class OrderConfirm extends Component {
 
     render() {
         return(
-            <View>
+            <MainContainer>
                 <MainHeading >
                     Order Confirmation Screen
                  </MainHeading>
-                <Button>
-                    Pay with Card
-                </Button>
-                <Button >
-                    Redeem with Points
-                </Button>
-
-            </View>
+                 <ButtonContainer>
+                    <Button>
+                        Pay with Card
+                    </Button>
+                    <Button >
+                        Redeem with Points
+                    </Button>
+                 </ButtonContainer>
+            </MainContainer>
         )
     }
 }
+

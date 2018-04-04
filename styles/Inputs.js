@@ -6,6 +6,7 @@ align-self: stretch;
 background-color: #fff;
 border-radius: 5;
 border-width: 1;
+overflow: hidden;
 border-color: #007aff;
 color: #007aff;
 font-size: 18px;

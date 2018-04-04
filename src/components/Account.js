@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
 import Button from './Button';
 import { MainHeading, SubHeading } from '../../styles/Texts';
+import { ButtonContainer } from '../../styles/Buttons';
+import { MainContainer } from '../../styles/Views';
 
 export default class Account extends Component {
 
@@ -19,7 +20,7 @@ export default class Account extends Component {
 
     render() {
         return(
-            <View>
+            <MainContainer> 
                 <MainHeading >
                     Account Information
                 </MainHeading>
@@ -35,11 +36,24 @@ export default class Account extends Component {
                 <SubHeading >
                     { `Date of Birth: ${this.state.DOB}` }
                 </SubHeading>
-           
-            <Button onPress={ () => this.goToAccountSettings() }>
-                Edit Account Info
-            </Button>
-            </View>
+                <ButtonContainer>
+                    <Button onPress={ () => this.goToAccountSettings() }>
+                        Edit Account Info
+                    </Button>
+                </ButtonContainer>
+            </MainContainer>
         )
+    }
+}
+
+const styles = {
+    viewContainer: {
+        height: '100%',
+        width: '100%',
+    },
+    buttonContainer: {
+        width: '100%',
+        position: "absolute",
+        bottom: 5
     }
 }

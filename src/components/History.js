@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { MainHeading } from '../../styles/Texts';
+import { MainContainer } from '../../styles/Views';
+
 
 const History = () => {
     return(
 
-        <View>
+        <MainContainer>
             <MainHeading >
                 History Page
             </MainHeading>
-        </View>
+        </MainContainer>
 
     )
 }

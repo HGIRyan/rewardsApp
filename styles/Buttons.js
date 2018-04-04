@@ -10,6 +10,10 @@ export const ButtonPush = styled.TouchableOpacity`
   margin-left: 5;
   margin-right: 5;
   margin-top: 10;
+  box-shadow: 2px 2px;
+  shadow-color: #000;
+  shadowOpacity: .5;
+  shadowRadius: 2;
 `;
 // flex: 1,   this forces it to fill the whole screen/view height
 
@@ -21,3 +25,42 @@ font-weight: 600;
 padding: 10px;
 }
 `;
+
+export const HalfButtonText = styled.Text`
+alignSelf: center;
+color: #fff;
+fontSize: 16px;
+font-weight: 700;
+padding: 10px;
+}
+`;
+
+export const HalfButtonPush = styled.TouchableOpacity`
+  height: 40;
+  background-color: ${props => props.cancel ? 'red' : '#23DD10'};
+  border-radius: 5;
+  width: 40%;
+  border-width: 0;
+  border-color: #fff;
+  margin-left: 5;
+  margin-right: 5;
+  margin-top: 10;
+  box-shadow: 2px 2px;
+  shadow-color: #000;
+  shadowOpacity: .5;
+  shadowRadius: 2;
+`;
+
+export const TwoButtonContainer = styled.View`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+`
+
+export const ButtonContainer = styled.View`
+  width: 100%;
+  position: absolute;
+  bottom: 5
+`

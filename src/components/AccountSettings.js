@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
 import { AccountInput } from '../../styles/Inputs';
 import { MainHeading } from '../../styles/Texts';
+import { TwoButtonContainer } from '../../styles/Buttons';
+import HalfButton from './HalfButton';
+import { HalfButtonPush, HalfButtonText } from '../../styles/Buttons';
+import { MainContainer } from '../../styles/Views';
+
+
 
 export default class Account extends Component {
 
@@ -12,6 +17,10 @@ export default class Account extends Component {
         DOB: 'MM/DD/YYYY'
     }
 
+    goToAccount = () => {
+        this.props.navigation.navigate('Account')
+    }
+
     render() {
         console.log(this.state.name)
         console.log(this.state.phone)
@@ -20,7 +29,7 @@ export default class Account extends Component {
 // resource for react native inputs: https://facebook.github.io/react-native/docs/textinput.html#onsubmitediting
 
         return(
-            <View>
+            <MainContainer>
                 <MainHeading >
                      Update Account Information
                  </MainHeading>
@@ -40,7 +49,18 @@ export default class Account extends Component {
                     onChangeText={(DOB) => this.setState({DOB})}
                     placeholder={this.state.DOB}>
                 </AccountInput>
-            </View>
+                <TwoButtonContainer>
+                    <HalfButton>
+                        Save
+                    </HalfButton>
+                    <HalfButtonPush cancel 
+                        onPress={ () => this.goToAccount() }>
+                        <HalfButtonText>
+                            Cancel
+                        </HalfButtonText>
+                    </HalfButtonPush>
+                </TwoButtonContainer>
+            </MainContainer>
         )
     }
 }
