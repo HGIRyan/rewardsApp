@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Image, View } from 'react-native';
+
+import { getUserInfo } from '../../ducks/reducer';
 import Button from './Button';
 import { MainHeading, SubHeading } from '../../styles/Texts';
 import { ButtonContainer } from '../../styles/Buttons';
 import { MainContainer } from '../../styles/Views';
 import profilePic from '../assests/profile.png';
 
-export default class Account extends Component {
+class Account extends Component {
 
-    state = {
-        name: "Ray",
-        phone: "801-987-9076",
-        email: 'jo@gmail.com',
-        DOB: '11-11-11'
+    // state = {
+    //     name: "Ray",
+    //     phone: "801-987-9076",
+    //     email: 'jo@gmail.com',
+    //     DOB: '11-11-11'
+    // }
+    componentWillMount() {
+        this.props.getUserInfo()
     }
 
     goToAccountSettings = () => {
@@ -21,6 +27,10 @@ export default class Account extends Component {
 
 
     render() {
+        const user = this.props.user;
+        var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
+
+
         return(
             <MainContainer> 
                 <MainHeading >
@@ -30,16 +40,23 @@ export default class Account extends Component {
                     <Image source={profilePic}  />
                 </View>
                 <SubHeading >
-                    { `Name: ${this.state.name}` }
+                Name: { !user.firstname ? null:user.firstname +' ' + user.lastname}
+
                 </SubHeading>
                 <SubHeading >
-                    { `Phone Number: ${this.state.phone}` }
+                Name: { !user.firstname ? null:user.phone}
+
                 </SubHeading>
                 <SubHeading >
-                    { `Email: ${this.state.email}` }
+                Email: { !user.firstname ? null:user.email}
+
                 </SubHeading>
                 <SubHeading >
-                    { `Date of Birth: ${this.state.DOB}` }
+                Date of Birth: : { !user.firstname ? null:
+                new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)
+                 }
+                
+
                 </SubHeading>
                 <ButtonContainer>
                     <Button onPress={ () => this.goToAccountSettings() }>
@@ -50,6 +67,14 @@ export default class Account extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+      user: state.user
+    }
+  }
+  
+  export default connect(mapStateToProps, { getUserInfo })(Account);
 
 const styles = {
    profilePic: {
