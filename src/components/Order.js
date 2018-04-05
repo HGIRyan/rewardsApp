@@ -6,34 +6,37 @@ import { ButtonContainer } from '../../styles/Buttons';
 import { MainContainer, AccountDetailsView, DetailViewContainer } from '../../styles/Views';
 import { RadioButtons } from 'react-native-radio-buttons'
 
+// source for radio buttons https://github.com/ArnaudRinquin/react-native-radio-buttons/blob/master/examples/App.js
 
 export default class Order extends Component {
 
-    state = {}
+    state = {
+        selectedOption: '',
+        selectedSalsa: ''
+    }
 
     goToOrderConfirm = () => {
         this.props.navigation.navigate('OrderConfirm')
     }
 
     render() {
+        //       Selecting and entree
         const options = [
-            "Tacos",
+            "Taco",
             "Salad",
-            "Chips"
+            "Nachos",
+            "Burrito"
           ];
 
-        const style = {
-            fontSize: 20
-        }
 
           function setSelectedOption(selectedOption){
             this.setState({
-              selectedOption
+              selectedOption: selectedOption
             });
           }
         
           function renderOption(option, selected, onSelect, index){
-            const style = selected ? { fontWeight: 'bold', color: '#084598', fontSize: 20} : { color: '#007aff', fontSize: 19 };
+            const style = selected ? { fontWeight: 'bold', color: '#084598', fontSize: 23, alignSelf: 'center'} : { color: '#007aff', fontSize: 19, alignSelf: 'center' };
         
             return (
               <TouchableOpacity onPress={onSelect} key={index}>
@@ -45,6 +48,41 @@ export default class Order extends Component {
           function renderContainer(optionNodes){
             return <View style={{marginLeft: 10}} >{optionNodes}</View>;
           }
+
+          // selecting salsa
+
+          const salsa = [
+            "none",
+            "Mild",
+            "Medium",
+            "Hot"
+          ];
+
+        const style = {
+            fontSize: 20
+        }
+
+          function setSelectedSalsa(selectedSalsa){
+            this.setState({
+              selectedSalsa: selectedSalsa
+            });
+          }
+        
+          function renderOption(option, selected, onSelect, index){
+            const salsaStyle = selected ? { fontWeight: 'bold', color: '#084598', fontSize: 23, alignSelf: 'center'} : { color: '#007aff', fontSize: 19, alignSelf: 'center' };
+        
+            return (
+              <TouchableOpacity onPress={onSelect} key={index}>
+                <Text style={salsaStyle}>{option}</Text>
+              </TouchableOpacity>
+            );
+          }
+        
+          function renderContainer(optionNodes){
+            return <View style={{marginLeft: 10}} >{optionNodes}</View>;
+          }
+
+
           console.log(this.state)
         return(
             <MainContainer>
@@ -53,11 +91,13 @@ export default class Order extends Component {
                       Select an Entree
                  </MainHeading>
                 </View>
+
+                {/* Selecting an entree */}
+
                 <DetailViewContainer style={{marginTop: -10}} >
                     <View style={styles.flexView} >
                         <RadioButtons
                             options={ options }
-                            optionStyle={{color: 'red'}}
                             onSelection={ setSelectedOption.bind(this) }
                             selectedOption={this.state.selectedOption }
                             renderOption={ renderOption }
@@ -76,6 +116,28 @@ export default class Order extends Component {
                     <MainHeading >
                       Choose your Toppings
                     </MainHeading>
+                    <DetailViewContainer style={{marginTop: -10}}>
+                    
+                    {/* Selecting Salsa */}
+                    <View style={styles.flexView} >
+                        <RadioButtons
+                            options={ salsa }
+                            onSelection={ setSelectedSalsa.bind(this) }
+                            selectedOption={this.state.selectedSalsa }
+                            renderOption={ renderOption }
+                            renderContainer={ renderContainer }
+                            />
+                            <AccountDetailsView>
+                                <BoldText>
+                                    Salsa:
+                                </BoldText>
+                                <SubHeading>
+                                    {this.state.selectedSalsa || 'none'}
+                                </SubHeading>
+                            </AccountDetailsView>
+                        </View>
+
+                    </DetailViewContainer>
                 <ButtonContainer>
                     <Button onPress={ () => this.goToOrderConfirm() }>
                         Click to Confirm Order
@@ -91,6 +153,6 @@ const styles = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 10
+        padding: 15
     }
 }
