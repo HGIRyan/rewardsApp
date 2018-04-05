@@ -9,7 +9,7 @@ import profilePic from '../assests/profile.png';
 export default class Account extends Component {
 
     state = {
-        name: "Tim",
+        name: "Ray",
         phone: "801-987-9076",
         email: 'jo@gmail.com',
         DOB: '11-11-11'
