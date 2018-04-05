@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
+import { connect } from 'react-redux';
+import { Image, View, ScrollView } from 'react-native';
+
+import { getUserInfo } from '../../ducks/reducer';
 import Button from './Button';
 import { MainHeading, SubHeading, BoldText } from '../../styles/Texts';
 import { ButtonContainer, TwoButtonContainer } from '../../styles/Buttons';
 import { MainContainer, AccountDetailsView, DetailViewContainer } from '../../styles/Views';
 import profilePic from '../assests/profile.png';
 
-export default class Account extends Component {
+class Account extends Component {
 
     state = {
-        name: "Ray",
-        phone: "801-987-9076",
-        email: 'jo@gmail.com',
-        DOB: '11-11-11'
+        name: "",
+        phone: "",
+        email: '',
+        DOB: ''
+    }
+    componentWillMount() {
+        this.props.getUserInfo()
     }
 
     goToAccountSettings = () => {
@@ -21,6 +27,10 @@ export default class Account extends Component {
 
 
     render() {
+        const user = this.props.user;
+        var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
+
+
         return(
             <MainContainer> 
                 <MainHeading >
@@ -29,13 +39,20 @@ export default class Account extends Component {
                 <View style={ styles.profilePic } >
                     <Image source={profilePic}  />
                 </View>
+                
                 <DetailViewContainer>
+                    
+                <ScrollView
+                    directionalLockEnabled={true}
+                    horizontal={true}
+                    vertical={false}>
+                    <View style={styles.scrollContainer} >
                     <AccountDetailsView>
                         <BoldText>
                             Name:
                         </BoldText>
                         <SubHeading >
-                            {this.state.name}
+                        { !user.firstname ? null:user.firstname +' ' + user.lastname}
                         </SubHeading>
                     </AccountDetailsView>
 
@@ -44,7 +61,7 @@ export default class Account extends Component {
                             Phone Number:
                         </BoldText>
                         <SubHeading >
-                            {this.state.phone}
+                        { !user.firstname ? null:user.phone}
                         </SubHeading>
                     </AccountDetailsView>
 
@@ -53,7 +70,7 @@ export default class Account extends Component {
                             Email:
                         </BoldText>
                         <SubHeading >
-                            {this.state.email}
+                        { !user.firstname ? null:user.email}
                         </SubHeading>
                     </AccountDetailsView>
 
@@ -62,10 +79,16 @@ export default class Account extends Component {
                             Date of Birth:
                         </BoldText>
                         <SubHeading >
-                            {this.state.DOB}
+                            { !user.firstname ? null:
+                            new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)
+                            }
                         </SubHeading>
                     </AccountDetailsView>
+                    </View>
+                    </ScrollView>
+                   
                 </DetailViewContainer>
+               
                 <ButtonContainer>
                     <Button onPress={ () => this.goToAccountSettings() }>
                         Edit Account Info
@@ -76,10 +99,24 @@ export default class Account extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+      user: state.user
+    }
+  }
+  
+  export default connect(mapStateToProps, { getUserInfo })(Account);
+
 const styles = {
    profilePic: {
        alignSelf: 'center',
        width: 200,
        height: 200,
+   },
+   scrollContainer: {
+       display: 'flex',
+       flexDirection: 'column',
+       justifyContent: 'flex-start',
+       alignItems: 'flex-start'
    }
 }
