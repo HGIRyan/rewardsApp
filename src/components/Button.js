@@ -1,10 +1,9 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
 import { ButtonPush, ButtonText } from '../../styles/Buttons';
 
 const Button = ({ onPress, children }) => {
     return(
-        <ButtonPush  onPress={onPress}  >
+        <ButtonPush style={styles.button} onPress={onPress}  >
             <ButtonText>
                 { children }
             </ButtonText>
@@ -12,5 +11,11 @@ const Button = ({ onPress, children }) => {
     )
 }
 
+const styles = {
+    button: {
+        position: 'relative',
+        bottom: 0
+    }
+}
 
 export default Button;
