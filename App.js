@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, StackNavigator } from 'react-native';
 import { Tabs } from './router';
+
+import { Provider } from 'react-redux';
+import store from './store';
+
 // import Navbar from './src/components/Navbar';
 // import Login from './src/components/Login';
 // import Home from './src/components/Home';
@@ -11,28 +15,29 @@ import { Tabs } from './router';
 
 export default class App extends Component {
   render() {
-      return(
-
+    return (
+      <Provider store={store} >
         <Tabs style={style.tabs} />
-      ) 
-    }
+      </Provider>
+    )
   }
-    // return 
-      // <Provider store={createStore(reducers)}>
-        // <View>
-        //   <Text>
-        //     Rewards App
-          
-          {/* </Text> */}
-          // <Tabs/>
-      
+}
+// return 
+// <Provider store={createStore(reducers)}>
+// <View>
+//   <Text>
+//     Rewards App
 
-          {/* <Navbar/> */}
+{/* </Text> */ }
+// <Tabs/>
 
-        {/* </View> */}
-      // </Provider>
-    
-  
+
+{/* <Navbar/> */ }
+
+{/* </View> */ }
+// </Provider>
+
+
 
 const style = {
   tabs: {
