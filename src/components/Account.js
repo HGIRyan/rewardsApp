@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Image, View } from 'react-native';
 import Button from './Button';
 import { MainHeading, SubHeading } from '../../styles/Texts';
+import { ButtonContainer } from '../../styles/Buttons';
+import { MainContainer } from '../../styles/Views';
+import profilePic from '../assests/profile.png';
 
 export default class Account extends Component {
 
     state = {
-        name: "Tim",
+        name: "Ray",
         phone: "801-987-9076",
         email: 'jo@gmail.com',
         DOB: '11-11-11'
@@ -19,10 +22,13 @@ export default class Account extends Component {
 
     render() {
         return(
-            <View>
+            <MainContainer> 
                 <MainHeading >
                     Account Information
                 </MainHeading>
+                <View style={ styles.profilePic } >
+                    <Image source={profilePic}  />
+                </View>
                 <SubHeading >
                     { `Name: ${this.state.name}` }
                 </SubHeading>
@@ -35,11 +41,20 @@ export default class Account extends Component {
                 <SubHeading >
                     { `Date of Birth: ${this.state.DOB}` }
                 </SubHeading>
-           
-            <Button onPress={ () => this.goToAccountSettings() }>
-                Edit Account Info
-            </Button>
-            </View>
+                <ButtonContainer>
+                    <Button onPress={ () => this.goToAccountSettings() }>
+                        Edit Account Info
+                    </Button>
+                </ButtonContainer>
+            </MainContainer>
         )
     }
+}
+
+const styles = {
+   profilePic: {
+       alignSelf: 'center',
+       width: 200,
+       height: 200
+   }
 }
