@@ -9,6 +9,14 @@ alignSelf: center;
 
 export const SubHeading = styled.Text`
 font-size: 18px;
+color: #007aff;
+padding: 15px;
+marginLeft: -20px;
+`;
+
+export const BoldText = styled.Text`
+font-size: 18px;
 color: #084598;
 padding: 15px;
-`;
+font-weight: 800;
+`

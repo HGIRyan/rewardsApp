@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import Button from './Button';
-import { MainHeading, SubHeading } from '../../styles/Texts';
-import { ButtonContainer } from '../../styles/Buttons';
-import { MainContainer } from '../../styles/Views';
+import { MainHeading, SubHeading, BoldText } from '../../styles/Texts';
+import { ButtonContainer, TwoButtonContainer } from '../../styles/Buttons';
+import { MainContainer, AccountDetailsView, DetailViewContainer } from '../../styles/Views';
 import profilePic from '../assests/profile.png';
 
 export default class Account extends Component {
@@ -29,18 +29,43 @@ export default class Account extends Component {
                 <View style={ styles.profilePic } >
                     <Image source={profilePic}  />
                 </View>
-                <SubHeading >
-                    { `Name: ${this.state.name}` }
-                </SubHeading>
-                <SubHeading >
-                    { `Phone Number: ${this.state.phone}` }
-                </SubHeading>
-                <SubHeading >
-                    { `Email: ${this.state.email}` }
-                </SubHeading>
-                <SubHeading >
-                    { `Date of Birth: ${this.state.DOB}` }
-                </SubHeading>
+                <DetailViewContainer>
+                    <AccountDetailsView>
+                        <BoldText>
+                            Name:
+                        </BoldText>
+                        <SubHeading >
+                            {this.state.name}
+                        </SubHeading>
+                    </AccountDetailsView>
+
+                    <AccountDetailsView>
+                        <BoldText>
+                            Phone Number:
+                        </BoldText>
+                        <SubHeading >
+                            {this.state.phone}
+                        </SubHeading>
+                    </AccountDetailsView>
+
+                    <AccountDetailsView>
+                        <BoldText>
+                            Email:
+                        </BoldText>
+                        <SubHeading >
+                            {this.state.email}
+                        </SubHeading>
+                    </AccountDetailsView>
+
+                    <AccountDetailsView>
+                        <BoldText>
+                            Date of Birth:
+                        </BoldText>
+                        <SubHeading >
+                            {this.state.DOB}
+                        </SubHeading>
+                    </AccountDetailsView>
+                </DetailViewContainer>
                 <ButtonContainer>
                     <Button onPress={ () => this.goToAccountSettings() }>
                         Edit Account Info
@@ -55,6 +80,6 @@ const styles = {
    profilePic: {
        alignSelf: 'center',
        width: 200,
-       height: 200
+       height: 200,
    }
 }
