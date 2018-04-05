@@ -14,6 +14,7 @@ export default class Order extends Component {
         selectedOption: '',
         selectedSalsa: '',
         selectedLettuce: '',
+        selectedTomatoes: '',
     }
 
     goToOrderConfirm = () => {
@@ -66,11 +67,18 @@ export default class Order extends Component {
           }
         
           //  selecting lettuce
-          const lettuce = ['none', 'light', 'normal', 'extra']
+          const sides = ['none', 'light', 'normal', 'extra']
 
           function setselectedLettuce(selectedLettuce){
             this.setState({
               selectedLettuce: selectedLettuce
+            });
+          }
+
+          // selecting tomatoes
+          function setselectedTomatoes(selectedTomatoes){
+            this.setState({
+              selectedTomatoes: selectedTomatoes
             });
           }
 
@@ -132,19 +140,38 @@ export default class Order extends Component {
 
                         {/* selecting lettuce */}
                         <View style={styles.linearView} >
-                        <BoldText>
+                        <BoldText style={{paddingTop: -5}}>
                             Lettuce:
                         </BoldText>
                         <View>
                         <RadioButtons
-                            options={ lettuce }
+                            options={ sides }
                             onSelection={ setselectedLettuce.bind(this) }
                             selectedOption={this.state.selectedLettuce }
                             renderOption={ renderOption }
                             renderContainer={RadioButtons.getViewContainerRenderer({ flexDirection: 'row',
                               justifyContent: 'space-between',
                               width: '78%',
-                              paddingTop: 15,
+                              marginLeft: -5
+                              })}
+                            />
+                            </View>
+                        </View>
+                            
+                            {/* selecting tomatoes */}
+                            <View style={styles.linearView} >
+                        <BoldText style={{paddingTop: -5}}>
+                            Tomato:
+                        </BoldText>
+                        <View>
+                        <RadioButtons
+                            options={ sides }
+                            onSelection={ setselectedTomatoes.bind(this) }
+                            selectedOption={this.state.selectedTomatoes }
+                            renderOption={ renderOption }
+                            renderContainer={RadioButtons.getViewContainerRenderer({ flexDirection: 'row',
+                              justifyContent: 'space-between',
+                              width: '78%',
                               marginLeft: -5
                               })}
                             />
