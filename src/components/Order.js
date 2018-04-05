@@ -12,7 +12,8 @@ export default class Order extends Component {
 
     state = {
         selectedOption: '',
-        selectedSalsa: ''
+        selectedSalsa: '',
+        selectedLettuce: '',
     }
 
     goToOrderConfirm = () => {
@@ -21,12 +22,7 @@ export default class Order extends Component {
 
     render() {
         //       Selecting and entree
-        const options = [
-            "Taco",
-            "Salad",
-            "Nachos",
-            "Burrito"
-          ];
+        const options = [ "Taco", "Salad", "Nachos", "Burrito" ];
 
 
           function setSelectedOption(selectedOption){
@@ -51,16 +47,7 @@ export default class Order extends Component {
 
           // selecting salsa
 
-          const salsa = [
-            "none",
-            "Mild",
-            "Medium",
-            "Hot"
-          ];
-
-        const style = {
-            fontSize: 20
-        }
+          const salsa = ["none", "mild", "medium", "hot"];
 
           function setSelectedSalsa(selectedSalsa){
             this.setState({
@@ -69,17 +56,22 @@ export default class Order extends Component {
           }
         
           function renderOption(option, selected, onSelect, index){
-            const salsaStyle = selected ? { fontWeight: 'bold', color: '#084598', fontSize: 23, alignSelf: 'center'} : { color: '#007aff', fontSize: 19, alignSelf: 'center' };
+            const sideStyle = selected ? { fontWeight: 'bold', color: '#084598', fontSize: 19 } : { color: '#007aff', fontSize: 18 };
         
             return (
               <TouchableOpacity onPress={onSelect} key={index}>
-                <Text style={salsaStyle}>{option}</Text>
+                <Text style={sideStyle}>{option}</Text>
               </TouchableOpacity>
             );
           }
         
-          function renderContainer(optionNodes){
-            return <View style={{marginLeft: 10}} >{optionNodes}</View>;
+          //  selecting lettuce
+          const lettuce = ['none', 'light', 'normal', 'extra']
+
+          function setselectedLettuce(selectedLettuce){
+            this.setState({
+              selectedLettuce: selectedLettuce
+            });
           }
 
 
@@ -119,23 +111,46 @@ export default class Order extends Component {
                     <DetailViewContainer style={{marginTop: -10}}>
                     
                     {/* Selecting Salsa */}
-                    <View style={styles.flexView} >
+                    <View style={styles.linearView} >
+                        <BoldText>
+                            Salsa:
+                        </BoldText>
+                        <View>
                         <RadioButtons
                             options={ salsa }
                             onSelection={ setSelectedSalsa.bind(this) }
                             selectedOption={this.state.selectedSalsa }
                             renderOption={ renderOption }
-                            renderContainer={ renderContainer }
+                            renderContainer={RadioButtons.getViewContainerRenderer({ flexDirection: 'row',
+                              justifyContent: 'space-between',
+                              width: '78%',
+                              paddingTop: 15,
+                              })}
                             />
-                            <AccountDetailsView>
-                                <BoldText>
-                                    Salsa:
-                                </BoldText>
-                                <SubHeading>
-                                    {this.state.selectedSalsa || 'none'}
-                                </SubHeading>
-                            </AccountDetailsView>
+                            </View>
                         </View>
+
+                        {/* selecting lettuce */}
+                        <View style={styles.linearView} >
+                        <BoldText>
+                            Lettuce:
+                        </BoldText>
+                        <View>
+                        <RadioButtons
+                            options={ lettuce }
+                            onSelection={ setselectedLettuce.bind(this) }
+                            selectedOption={this.state.selectedLettuce }
+                            renderOption={ renderOption }
+                            renderContainer={RadioButtons.getViewContainerRenderer({ flexDirection: 'row',
+                              justifyContent: 'space-between',
+                              width: '78%',
+                              paddingTop: 15,
+                              marginLeft: -5
+                              })}
+                            />
+                            </View>
+                        </View>
+
 
                     </DetailViewContainer>
                 <ButtonContainer>
@@ -154,5 +169,10 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         padding: 15
+    },
+    linearView: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start'
     }
 }
