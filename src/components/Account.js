@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Button from './Button';
 import { MainHeading, SubHeading } from '../../styles/Texts';
-import { connect } from 'react-redux';
-import { getUserInfo } from '../../ducks/reducer';
 
-class Account extends Component {
+export default class Account extends Component {
 
     state = {
         name: "Tim",
@@ -17,34 +15,25 @@ class Account extends Component {
     goToAccountSettings = () => {
         this.props.navigation.navigate('AccountSettings')
     }
-    componentWillMount() {
-        this.props.getUserInfo()
-    }
+
 
     render() {
-        console.log(this.state.user)
-        const user = this.props.user
-        var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
-
         return(
             <View>
                 <MainHeading >
                     Account Information
                 </MainHeading>
                 <SubHeading >
-                Name: { !user.firstname ? null:user.firstname +' ' + user.lastname}
+                    { `Name: ${this.state.name}` }
                 </SubHeading>
                 <SubHeading >
-                Phone Number:  { !user.firstname ? null:user.phone}
+                    { `Phone Number: ${this.state.phone}` }
                 </SubHeading>
                 <SubHeading >
-                Email:   { !user.firstname ? null:user.email }
+                    { `Email: ${this.state.email}` }
                 </SubHeading>
                 <SubHeading >
-                Date of Birth: { !user.firstname ? null:new Date('1990-05-11'.slice(0,10)).toLocaleDateString('en-us', options)}
-                
-               
-
+                    { `Date of Birth: ${this.state.DOB}` }
                 </SubHeading>
            
             <Button onPress={ () => this.goToAccountSettings() }>
@@ -54,10 +43,3 @@ class Account extends Component {
         )
     }
 }
-function mapStateToProps(state) {
-    return {
-      user: state.user
-    }
-  }
-  
-  export default connect(mapStateToProps, { getUserInfo })(Account);
