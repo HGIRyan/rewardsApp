@@ -39,6 +39,29 @@ class Account extends Component {
                 <View style={ styles.profilePic } >
                     <Image source={profilePic}  />
                 </View>
+<<<<<<< HEAD
+                <SubHeading >
+                First Name: { !user.firstname ? null:user.firstname }
+
+                </SubHeading>
+                <SubHeading >
+                Last Name: { !user.lastname ? null:user.lastname}
+
+                </SubHeading>
+                <SubHeading >
+                Phone: { !user.phone ? null:user.phone}
+
+                </SubHeading>
+                <SubHeading >
+                Email: { !user.email ? null:user.email}
+
+                </SubHeading>
+                <SubHeading >
+                Date of Birth: { !user.birthday ? null:
+                new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)
+                 }
+                
+=======
                 
                 <DetailViewContainer>
                     
@@ -73,6 +96,7 @@ class Account extends Component {
                         { !user.firstname ? null:user.email}
                         </SubHeading>
                     </AccountDetailsView>
+>>>>>>> master
 
                     <AccountDetailsView>
                         <BoldText>
