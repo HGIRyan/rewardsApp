@@ -40,19 +40,23 @@ class Account extends Component {
                     <Image source={profilePic}  />
                 </View>
                 <SubHeading >
-                Name: { !user.firstname ? null:user.firstname +' ' + user.lastname}
+                First Name: { !user.firstname ? null:user.firstname }
 
                 </SubHeading>
                 <SubHeading >
-                Name: { !user.firstname ? null:user.phone}
+                Last Name: { !user.lastname ? null:user.lastname}
 
                 </SubHeading>
                 <SubHeading >
-                Email: { !user.firstname ? null:user.email}
+                Phone: { !user.phone ? null:user.phone}
 
                 </SubHeading>
                 <SubHeading >
-                Date of Birth: : { !user.firstname ? null:
+                Email: { !user.email ? null:user.email}
+
+                </SubHeading>
+                <SubHeading >
+                Date of Birth: { !user.birthday ? null:
                 new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)
                  }
                 

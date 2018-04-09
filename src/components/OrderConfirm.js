@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+
+import { newOrder, getUserInfo } from '../../ducks/reducer';
+
 import Button from './Button';
 import { MainHeading } from '../../styles/Texts';
 import { ButtonContainer } from '../../styles/Buttons';
@@ -7,31 +11,79 @@ import { MainContainer, DetailViewContainer } from '../../styles/Views';
 import OrderDetails from './OrderDetails';
 
 
-export default class OrderConfirm extends Component {
+class OrderConfirm extends Component {
 
-    state = {}
+    state = {
+        enoughPoints: false,
+        cartTotal:'5.95'
+    }
 
+    componentWillMount() {
+        if( this.props.user.pointbalance / 10 >= this.state.cartTotal ){
+            this.setState({
+                enoughPoints:true
+            })
+        }
+    }
+    goHome = () => {
+        this.props.navigation.pop()
+        this.props.navigation.navigate('Home')
+    }
+
+    confirmOrder(paymentMethod,date) {
+        let body = {
+            "userid": 1,
+            "total": (paymentMethod === 'Rewards'?    parseInt(this.state.cartTotal * 10):this.state.cartTotal),
+            "orderdate": date,
+            "paymentType": paymentMethod
+        }
+        console.log(body)
+        this.props.newOrder(body)
+            .then(_ => {
+                return this.goHome()
+            })
+    }
+    
     render() {
-        return(
+        let date = Date().slice(0,24)
+        return (
             <MainContainer>
                 <MainHeading >
                     Order Details
                  </MainHeading>
-                 <DetailViewContainer >
-                    <OrderDetails/>
-                 </DetailViewContainer>
-                 <ButtonContainer>
-                    <Button>
+                <DetailViewContainer >
+                    <OrderDetails />
+                    <Text>pointbalance:{this.props.user.pointbalance}
+                    can use points?: {this.props.user.pointbalance / 10 >= this.state.cartTotal? 'true':'false'}
+                    rewards cart total: {parseInt(this.state.cartTotal * 10)}
+                    
+                    </Text>
+                </DetailViewContainer>
+                <ButtonContainer>
+                    <Button onPress={ () => this.confirmOrder('Card',date) }>
                         Pay with Card
                     </Button>
-                    <Button >
-                        Redeem with Points
-                    </Button>
-                 </ButtonContainer>
+                    
+                    {this.state.enoughPoints === true  ? 
+                    <Button disabled={true} onPress={ () => this.confirmOrder('Rewards', date) }>
+                    Redeem with Points
+                </Button>
+                    :
+                    null
+                }
+                </ButtonContainer>
             </MainContainer>
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, { newOrder, getUserInfo })(OrderConfirm);
 
 const styles = {
     OrderDetailView: {
@@ -42,7 +94,7 @@ const styles = {
         marginRight: 40,
         shadowColor: '#000',
         overflow: 'scroll',
-        shadowOffset: {width: 0, height: 2},
+        shadowOffset: { width: 0, height: 2 },
         shadowOpacity: .2
     }
 }
