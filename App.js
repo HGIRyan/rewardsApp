@@ -17,7 +17,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store} >
+        <View style={{flex: 1}}>
         <Tabs style={style.tabs} />
+        </View>
       </Provider>
     )
   }
