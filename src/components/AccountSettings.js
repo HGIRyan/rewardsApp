@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
+import { connect } from 'react-redux';
+
+import { updateUserInfo } from '../../ducks/reducer';
 import { AccountInput } from '../../styles/Inputs';
 import { MainHeading } from '../../styles/Texts';
 import { TwoButtonContainer } from '../../styles/Buttons';
@@ -10,23 +13,47 @@ import profilePic from '../assests/profile.png';
 
 
 
-export default class Account extends Component {
+class Account extends Component {
 
     state = {
-        name: 'name',
+        // name: 'michael',
         phone: 'phone number',
         email: 'email address',
-        DOB: 'MM/DD/YYYY'
+        DOB: 'MM/DD/YYYY',
+        newFirstName: '',
+        newLastName: '',
+        newPhone: '',
+        newEmail: '',
+        newDOB: ''
     }
 
     goToAccount = () => {
-        this.props.navigation.navigate('Account')
+        this.props.navigation.pop()
+    }
+    saveUser(){
+        const user = this.props.user;
+
+        let userUpdatedInfo = {
+            
+            "firstname": ( this.state.newFirstName.length >=1 ? this.state.newFirstName : user.firstname ) ,
+            "lastname":( this.state.newLastName.length >=1 ? this.state.newLastName : user.lastname ) ,
+            "email":( this.state.newEmail.length >=1 ? this.state.newEmail : user.email ) ,
+            "picture":"https://lh5.googleusercontent.com/-2pmHCiYS-3s/AAAAAAAAAAI/AAAAAAAAX20/J7yVcv6GHn8/photo.jpg",
+            "birthday":( this.state.newDOB.length >=1 ? this.state.newDOB : user.birthday ) ,
+            "phone":( this.state.newPhone.length >=1 ? this.state.newPhone : user.phone ) ,
+        }
+        this.props.updateUserInfo(userUpdatedInfo)
+        .then( _=> {
+            return this.goToAccount()
+        })
     }
 
     render() {
-        console.log(this.state.name)
-        console.log(this.state.phone)
-        console.log(this.state.email)
+        const user = this.props.user;
+        var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
+
+        // console.log(this.state.phone)
+        // console.log(this.state.email)
 
 // resource for react native inputs: https://facebook.github.io/react-native/docs/textinput.html#onsubmitediting
 
@@ -39,25 +66,36 @@ export default class Account extends Component {
                     <Image source={profilePic}  />
                  </View>
                 <AccountInput 
-                    onChangeText={(name) => this.setState({name})}
-                    placeholder={this.state.name}>
+                    onChangeText={(newFirstName) => this.setState({newFirstName})}
+                    placeholder={user.firstname}>
                 </AccountInput>
                 <AccountInput 
-                    onChangeText={(phone) => this.setState({phone})}
-                    placeholder={this.state.phone}>
+                    onChangeText={(newLastName) => this.setState({newLastName})}
+                    placeholder={user.lastname }>
                 </AccountInput>
                 <AccountInput 
-                    onChangeText={(email) => this.setState({email})}
-                    placeholder={this.state.email}>
+                    onChangeText={(newPhone) => this.setState({newPhone})}
+                    placeholder={user.phone}>
                 </AccountInput>
                 <AccountInput 
-                    onChangeText={(DOB) => this.setState({DOB})}
-                    placeholder={this.state.DOB}>
+                    onChangeText={(newEmail) => this.setState({newEmail})}
+                    placeholder={user.email}>
+                </AccountInput>
+                <AccountInput 
+                    onChangeText={(newDOB) => this.setState({newDOB})}
+                    
+                    placeholder={new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}>
                 </AccountInput>
                 <TwoButtonContainer>
-                    <HalfButton>
+
+                    <HalfButtonPush  
+                        onPress={ () => this.saveUser() }>
+                        <HalfButtonText>
                         Save
-                    </HalfButton>
+                        </HalfButtonText>
+                    </HalfButtonPush>
+
+
                     <HalfButtonPush cancel 
                         onPress={ () => this.goToAccount() }>
                         <HalfButtonText>
@@ -69,6 +107,13 @@ export default class Account extends Component {
         )
     }
 }
+function mapStateToProps(state) {
+    return {
+      user: state.user
+    }
+  }
+  
+  export default connect(mapStateToProps, { updateUserInfo })(Account);
 
 const styles = {
     profilePic: {
