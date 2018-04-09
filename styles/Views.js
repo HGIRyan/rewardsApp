@@ -5,7 +5,7 @@ export const MainContainer = styled.View`
     width: 100%;
     height: 100%
 `
-
+// #efeff4 - light blue, 4D3D2D brown, 
 export const DetailViewContainer = styled.View`
     min-height: 80;
     borderRadius: 10;
