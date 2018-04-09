@@ -2,13 +2,17 @@ import axios from 'axios';
 import { BASEURL } from '../secrets.js';
 
 const initialState = {
-    user:[]
+    user:[],
+    cart:[]
 }
 
 // --ACTION CONSTRAINTS--
 const GET_USER = 'GET_USER';
 const UPDATE_USER = 'UPDATE_USER';
 const NEW_ORDER = 'NEW_ORDER';
+
+const ADD_TO_CART = 'ADD_TO_CART';
+const ITEMS_IN_CART = 'ITEMS_IN_CART';
 
 // --ACTION CREATORS--
 export function getUserInfo() {
@@ -39,6 +43,14 @@ export function newOrder(body) {
         payload: orderData
     }
 }
+export function addToCart(val) {
+    // console.log('set products reducer', val)
+    return {
+        type: ADD_TO_CART,
+        payload: val
+    }
+}
+
 
 
 // --REDUCER--
@@ -54,6 +66,9 @@ export default function reducer(state = initialState, action) {
 
         case NEW_ORDER + '_FULFILLED':
             return Object.assign({}, state, { user: action.payload });
+
+        case ADD_TO_CART:
+            return Object.assign({}, state, { cart: action.payload });
 
         default:
             return state;

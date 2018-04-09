@@ -7,7 +7,7 @@ import Button from './Button';
 import { MainHeading, SubHeading, BoldText } from '../../styles/Texts';
 import { ButtonContainer, TwoButtonContainer } from '../../styles/Buttons';
 import { MainContainer, AccountDetailsView, DetailViewContainer } from '../../styles/Views';
-import profilePic from '../assests/profile.png';
+// import profilePic from '../assests/profile.png';
 
 class Account extends Component {
 
@@ -29,7 +29,7 @@ class Account extends Component {
     render() {
         const user = this.props.user;
         var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
-
+console.log(user.picture)
 
         return(
             <MainContainer> 
@@ -37,31 +37,10 @@ class Account extends Component {
                     Account Information
                 </MainHeading>
                 <View style={ styles.profilePic } >
-                    <Image source={profilePic}  />
+                    <Image source=
+                    {{ uri: user.picture}}  
+                    style={{width: 200, height: 200, borderRadius:100}} />
                 </View>
-<<<<<<< HEAD
-                <SubHeading >
-                First Name: { !user.firstname ? null:user.firstname }
-
-                </SubHeading>
-                <SubHeading >
-                Last Name: { !user.lastname ? null:user.lastname}
-
-                </SubHeading>
-                <SubHeading >
-                Phone: { !user.phone ? null:user.phone}
-
-                </SubHeading>
-                <SubHeading >
-                Email: { !user.email ? null:user.email}
-
-                </SubHeading>
-                <SubHeading >
-                Date of Birth: { !user.birthday ? null:
-                new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)
-                 }
-                
-=======
                 
                 <DetailViewContainer>
                     
@@ -96,7 +75,6 @@ class Account extends Component {
                         { !user.firstname ? null:user.email}
                         </SubHeading>
                     </AccountDetailsView>
->>>>>>> master
 
                     <AccountDetailsView>
                         <BoldText>
@@ -105,6 +83,7 @@ class Account extends Component {
                         <SubHeading >
                             { !user.firstname ? null:
                             new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)
+                            
                             }
                         </SubHeading>
                     </AccountDetailsView>
