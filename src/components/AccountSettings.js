@@ -67,24 +67,24 @@ class Account extends Component {
                  </View>
                 <AccountInput 
                     onChangeText={(newFirstName) => this.setState({newFirstName})}
-                    placeholder={user.firstname}>
+                    value={user.firstname}>
                 </AccountInput>
                 <AccountInput 
                     onChangeText={(newLastName) => this.setState({newLastName})}
-                    placeholder={user.lastname }>
+                    value={user.lastname }>
                 </AccountInput>
                 <AccountInput 
                     onChangeText={(newPhone) => this.setState({newPhone})}
-                    placeholder={user.phone}>
+                    value={user.phone}>
                 </AccountInput>
                 <AccountInput 
                     onChangeText={(newEmail) => this.setState({newEmail})}
-                    placeholder={user.email}>
+                    value={user.email}>
                 </AccountInput>
                 <AccountInput 
                     onChangeText={(newDOB) => this.setState({newDOB})}
                     
-                    placeholder={new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}>
+                    value={new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}>
                 </AccountInput>
                 <TwoButtonContainer>
 

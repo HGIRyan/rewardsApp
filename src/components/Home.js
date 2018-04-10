@@ -1,10 +1,7 @@
 import React, { Component }  from 'react';
-
 import { connect } from 'react-redux';
 import { getUserInfo } from '../../ducks/reducer';
 import { View, Text, Button } from 'react-native';
-
-
 import { MainHeading } from '../../styles/Texts';
 import { MainContainer } from '../../styles/Views';
 
