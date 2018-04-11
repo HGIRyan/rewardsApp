@@ -177,7 +177,8 @@ export default class Order extends Component {
                             Meat:
                         </BoldText>
                         <View>
-                            <RadioButtons                                              options={ meat }
+                            <RadioButtons 
+                                options={ meat }
                                 onSelection={ setSelectedMeat.bind(this) }
                                 selectedOption={this.state.selectedMeat }
                                 renderOption={ renderOption }

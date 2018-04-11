@@ -17,12 +17,12 @@ import store from './store';
 export default class App extends Component {
   render() {
     return (
-      // <Provider store={store} >
+      <Provider store={store} >
         <View style={{flex: 1}}>
-        <Login/>
-        {/* <Tabs style={style.tabs} /> */}
+        {/* <Login/> */}
+        <Tabs style={style.tabs} />
         </View>
-      /* </Provider> */
+      </Provider>
     )
   }
 }

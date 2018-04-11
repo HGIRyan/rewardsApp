@@ -4,6 +4,7 @@ import { getUserInfo } from '../../ducks/reducer';
 import { View, Text, Button } from 'react-native';
 import { MainHeading } from '../../styles/Texts';
 import { MainContainer } from '../../styles/Views';
+import Login from './Login';
 
 class Home extends Component {
     state={}
@@ -16,6 +17,7 @@ class Home extends Component {
             <MainHeading >
                 Home Page
             </MainHeading>
+            <Login/>
         </MainContainer>
         )
     }
