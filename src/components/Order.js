@@ -49,10 +49,10 @@ class Order extends Component {
     render() {
         //       Selecting and entree
         const options = [ 
-            {label: "Taco", value: 3}, 
-            {label: "Salad", value: 7}, 
-            {label: "Nachos", value: 6}, 
-            {label: "Burrito", value: 8}
+            {label: "Taco     $3", value: 3}, 
+            {label: "Salad    $7", value: 7}, 
+            {label: "Nachos   $6", value: 6}, 
+            {label: "Burrito    $8", value: 8}
         ];
 
         const extractText = (option) => option.label;
@@ -198,7 +198,8 @@ class Order extends Component {
                             Meat:
                         </BoldText>
                         <View>
-                            <RadioButtons                                              options={ meat }
+                            <RadioButtons 
+                                options={ meat }
                                 onSelection={ setSelectedMeat.bind(this) }
                                 selectedOption={this.state.selectedMeat }
                                 renderOption={ renderOption }

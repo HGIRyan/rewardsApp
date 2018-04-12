@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, SectionList, ListItem,ITEM_HEIGHT} from 'react-native';
+import { View, Text, ScrollView, FlatList, SectionList, ListItem,ITEM_HEIGHT} from 'react-native';
 import { connect } from 'react-redux';
 
 import { getUserInfo } from '../../ducks/reducer';
-import { MainHeading, SubHeading } from '../../styles/Texts';
-import { MainContainer, DetailViewContainer } from '../../styles/Views';
+import { MainHeading, SubHeading, BoldText } from '../../styles/Texts';
+import { MainContainer, DetailViewContainer, ColumnContainer } from '../../styles/Views';
 
 
 
@@ -20,7 +20,12 @@ class History extends Component {
                     Order History
             </MainHeading>
                 <DetailViewContainer>
-                    <SubHeading>orderdate   total   Points </SubHeading>
+                    <ScrollView>
+                        <ColumnContainer>
+                            <BoldText>Order Date</BoldText>   
+                            <BoldText style={{marginLeft: 40}} >Total</BoldText>   
+                            <BoldText>Points</BoldText>
+                        </ColumnContainer>                  
                     {user.orders.map((order, i) => {
                         return (
 
@@ -34,15 +39,24 @@ class History extends Component {
                     //     renderItem={({ item }) => <SubHeading>{item.key}</SubHeading>}
                     //     // renderItem={this.renderItem}
                     // />
-                    
-                    <SubHeading key={i} >{new Date(order.orderdate.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}  {order.total}   {parseInt(order.total.slice(1,8))}</SubHeading>
+                    <ColumnContainer key={i}>
+                            <SubHeading>
+                                {new Date(order.orderdate.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}
+                            </SubHeading>
+                            <SubHeading>
+                             {order.total}   
+                             </SubHeading>
+                            <SubHeading>
+                             {parseInt(order.total.slice(1,8))}
+                             </SubHeading>
+                    </ColumnContainer>
                             
                             
                         )
                     })}
 
 
-                   
+                   </ScrollView> 
                 </DetailViewContainer>
             </MainContainer>
 

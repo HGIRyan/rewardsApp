@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Login from './src/components/Login';
 import { Text, View, StyleSheet, StackNavigator } from 'react-native';
 import { Tabs } from './router';
 
@@ -18,6 +19,7 @@ export default class App extends Component {
     return (
       <Provider store={store} >
         <View style={{flex: 1}}>
+        {/* <Login/> */}
         <Tabs style={style.tabs} />
         </View>
       </Provider>

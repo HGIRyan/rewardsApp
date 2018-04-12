@@ -57,7 +57,7 @@ export const Tabs = TabNavigator({
         screen: Home,
         navigationOptions: {
             tabBarLabel: 'Home',
-            tabBarIcon: ({ tintColor }) => <Image source={ homeIcon } name='home' size={15} color={tintColor} />
+            tabBarIcon: ({ tintColor }) => <Image source={ homeIcon } name='Home' size={15} color={tintColor} />
 
         }
     },

@@ -5,9 +5,10 @@ export const MainContainer = styled.View`
     width: 100%;
     height: 100%
 `
-
+// #efeff4 - light blue, 4D3D2D brown, 
 export const DetailViewContainer = styled.View`
     min-height: 80;
+    max-height: 400;
     borderRadius: 10;
     backgroundColor: #fff;
     borderWidth: 1;
@@ -25,4 +26,12 @@ export const AccountDetailsView = styled.View`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+`
+
+export const ColumnContainer = styled.View`
+    display: flex;
+    flex-direction: row;
+    margin-left: 0px;
+    justify-content: space-around;
+    align-items: center;
 `
