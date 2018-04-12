@@ -7,7 +7,7 @@ import Button from './Button';
 import { MainHeading, SubHeading, BoldText } from '../../styles/Texts';
 import { ButtonContainer, TwoButtonContainer } from '../../styles/Buttons';
 import { MainContainer, AccountDetailsView, DetailViewContainer } from '../../styles/Views';
-import profilePic from '../assests/profile.png';
+// import profilePic from '../assests/profile.png';
 
 class Account extends Component {
 
@@ -29,7 +29,7 @@ class Account extends Component {
     render() {
         const user = this.props.user;
         var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
-
+console.log(user.picture)
 
         return(
             <MainContainer> 
@@ -37,7 +37,9 @@ class Account extends Component {
                     Account Information
                 </MainHeading>
                 <View style={ styles.profilePic } >
-                    <Image source={profilePic}  />
+                    <Image source=
+                    {{ uri: user.picture}}  
+                    style={{width: 200, height: 200, borderRadius:100}} />
                 </View>
                 
                 <DetailViewContainer>
@@ -81,6 +83,7 @@ class Account extends Component {
                         <SubHeading >
                             { !user.firstname ? null:
                             new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)
+                            
                             }
                         </SubHeading>
                     </AccountDetailsView>

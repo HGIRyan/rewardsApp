@@ -6,10 +6,13 @@ import { ButtonContainer } from '../../styles/Buttons';
 import { MainContainer, AccountDetailsView, DetailViewContainer } from '../../styles/Views';
 import { RadioButtons, SegmentedControls } from 'react-native-radio-buttons'
 import cartIcon from '../assests/cart.png';
+import { connect } from 'react-redux';
+import { addToCart } from '../../ducks/reducer';
+
 
 // source for radio buttons https://github.com/ArnaudRinquin/react-native-radio-buttons/blob/master/examples/App.js
 
-export default class Order extends Component {
+class Order extends Component {
 
     state = {
         selectedOption: '',
@@ -24,6 +27,24 @@ export default class Order extends Component {
     goToOrderConfirm = () => {
         this.props.navigation.navigate('OrderConfirm')
     }
+
+    addEntreeToCart(){
+        let details = {
+            "Entree": this.state.selectedOption.label,
+            "Price": this.state.selectedOption.value,
+            "Options":{
+                "Meat": this.state.selectedMeat,
+                "Salsa": this.state.selectedSalsa,
+                "Lettuce": this.state.selectedLettuce,
+                "Beans": this.state.selectedBeans
+            }
+        }
+        this.props.addToCart(details)
+            return this.goToOrderConfirm()
+
+
+    }
+
 
     render() {
         //       Selecting and entree
@@ -274,7 +295,7 @@ export default class Order extends Component {
 
                     </DetailViewContainer>
                 <ButtonContainer>
-                    <Button onPress={ () => this.goToOrderConfirm() }>
+                    <Button onPress={ () => this.addEntreeToCart() }>
                         Add Item to Cart
                     </Button>
                 </ButtonContainer>
@@ -282,6 +303,15 @@ export default class Order extends Component {
         )
     }
 }
+function mapStateToProps(state) {
+    console.log(state)
+    return {
+      user: state.user
+    }
+  }
+  
+  export default connect(mapStateToProps, { addToCart })(Order);
+
 
 const styles = {
     flexView: {

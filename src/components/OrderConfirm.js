@@ -15,15 +15,25 @@ class OrderConfirm extends Component {
 
     state = {
         enoughPoints: false,
-        cartTotal:'5.95'
+        cartTotal:0
     }
 
     componentWillMount() {
+        let cart =  this.props.cart;
+        let total = 0;
+
         if( this.props.user.pointbalance / 10 >= this.state.cartTotal ){
             this.setState({
                 enoughPoints:true
             })
         }
+        for(let i = 0 ; i <= cart.length -1 ; i++ ){
+            total = total+cart[i].Price
+        }
+       this.setState({
+           cartTotal:total
+       })
+
     }
     goHome = () => {
         this.props.navigation.pop()
@@ -45,6 +55,8 @@ class OrderConfirm extends Component {
     }
     
     render() {
+        const cart = this.props.cart;
+
         let date = Date().slice(0,24)
         return (
             <MainContainer>
@@ -53,11 +65,11 @@ class OrderConfirm extends Component {
                  </MainHeading>
                 <DetailViewContainer >
                     <OrderDetails />
-                    <Text>pointbalance:{this.props.user.pointbalance}
+                    {/* <Text>pointbalance:{this.props.user.pointbalance}
                     can use points?: {this.props.user.pointbalance / 10 >= this.state.cartTotal? 'true':'false'}
                     rewards cart total: {parseInt(this.state.cartTotal * 10)}
                     
-                    </Text>
+                    </Text> */}
                 </DetailViewContainer>
                 <ButtonContainer>
                     <Button onPress={ () => this.confirmOrder('Card',date) }>
@@ -78,8 +90,10 @@ class OrderConfirm extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state)
     return {
-        user: state.user
+        user: state.user,
+        cart: state.cart
     }
 }
 
