@@ -3,7 +3,8 @@ import { BASEURL } from '../secrets.js';
 
 const initialState = {
     user:[],
-    cart:[]
+    cart:[],
+    usersOrder: []
 }
 
 // --ACTION CONSTRAINTS--
@@ -44,7 +45,6 @@ export function newOrder(body) {
     }
 }
 export function addToCart(val) {
-    // console.log('set products reducer', val)
     return {
         type: ADD_TO_CART,
         payload: val
@@ -65,10 +65,17 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { user: action.payload });
 
         case NEW_ORDER + '_FULFILLED':
-            return Object.assign({}, state, { user: action.payload });
+            return Object.assign({}, state, { usersOrder: action.payload });
 
         case ADD_TO_CART:
-            return Object.assign({}, state, { cart: action.payload });
+           
+        
+       let newItem = state.cart.slice()
+       newItem.push(action.payload)
+       console.log(newItem)
+           
+        
+        return Object.assign({}, state, { cart: newItem });
 
         default:
             return state;

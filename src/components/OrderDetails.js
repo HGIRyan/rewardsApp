@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button, Alert } from 'react-native';
+import { connect } from 'react-redux';
+import { MainHeading, SubHeading, BoldText } from '../../styles/Texts';
 
 
-export default class OrderDetails extends Component {
+
+
+class OrderDetails extends Component {
     state = {
         items: [
             {
@@ -17,34 +21,74 @@ export default class OrderDetails extends Component {
                 name: 'Chips',
                 price: 6
             }
-        ]
+        ],
+        cartTotal: 0
     }
 
-
+    componentDidMount() {
+        let cart = this.props.cart;
+        let total = 0;
+        for (let i = 0; i <= cart.length - 1; i++) {
+            total = total + cart[i].Price
+        }
+        this.setState({
+            cartTotal: total
+        })
+    }
+    removeFromCart(index) {
+        let cart = this.props.cart;
+        console.log(cart[index])
+        Alert.alert(
+            'Are You Sure?',
+            `This will remove your ${cart[index].Entree} from your cart`,
+            [
+                {text: 'DELETE', onPress: () => console.log('OK Pressed')},
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+            ],
+            { cancelable: false }
+          )
+    }
     render() {
-        const itemName = this.state.items.map((items, i) => {
-            return <Text style={ styles.orderDetailText } key={i}>{ `Item: ${items.name}    Price: $${items.price}` }</Text>
-        })
-
-        const itemPrice = this.state.items.map((items, i) => {
-            return <Text style={ styles.orderDetailText }key={i}>{ `$${items.price}` }</Text>
-        })
+        const cart = this.props.cart;
+        console.log('CartTotal:', this.state.cartTotal)
 
 
-        return(
-            <View style={ styles.orderContainer } >
-            <View>
-                <Text>Item</Text>
-                {itemName}
-            </View>
-            <View>
-                <Text>Price</Text>
-                {itemPrice}
-            </View>
+        // const itemName = this.state.items.map((items, i) => {
+        //     return <Text style={ styles.orderDetailText } key={i}>{ `Item: ${items.name}    Price: $${items.price}` }</Text>
+        // })
+
+        // const itemPrice = this.state.items.map((items, i) => {
+        //     return <Text style={ styles.orderDetailText }key={i}>{ `n$${items.price}` }</Text>
+        // })
+
+
+        return (
+            <View  >
+                {cart.map((item, i) => {
+                    return (
+                        <SubHeading key={i}>
+                            <BoldText>Entree: </BoldText> {item.Entree}
+                            <BoldText>Price: </BoldText> {item.Price} <Button onPress={_=>this.removeFromCart(i)} title="Delete" />
+                        </SubHeading>
+                    )
+                }
+                )}
+                <BoldText>
+                    Cart Total: {this.state.cartTotal}
+                </BoldText>
             </View>
         )
     }
 }
+
+function mapStateToProps(state) {
+    console.log(state)
+    return {
+        cart: state.cart
+    }
+}
+
+export default connect(mapStateToProps)(OrderDetails);
 
 const styles = {
     orderContainer: {
