@@ -9,7 +9,7 @@ import { TwoButtonContainer } from '../../styles/Buttons';
 import HalfButton from './HalfButton';
 import { HalfButtonPush, HalfButtonText } from '../../styles/Buttons';
 import { MainContainer } from '../../styles/Views';
-import profilePic from '../assests/profile.png';
+// import profilePic from '../assests/profile.png';
 
 
 
@@ -63,7 +63,9 @@ class Account extends Component {
                      Edit Account Information
                  </MainHeading>
                  <View style={ styles.profilePic } >
-                    <Image source={profilePic}  />
+                 <Image source=
+                    {{ uri: user.picture}}  
+                    style={{width: 200, height: 200, borderRadius:100}} />
                  </View>
                  <TwoButtonContainer>
                 <AccountInput 
