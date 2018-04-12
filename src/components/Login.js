@@ -6,7 +6,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  ImageBackground
 } from 'react-native';
 import Auth0 from 'react-native-auth0';
 import Home from './Home';
@@ -15,6 +16,8 @@ import Button from './Button';
 import { ButtonContainer } from '../../styles/Buttons';
 import { BoldText, SubHeading } from '../../styles/Texts';
 import { MainContainer } from '../../styles/Views';
+import taco from '../assests/taco.jpg';
+
 
 var credentials = require('../../secrets');
 const auth0 = new Auth0(credentials);
@@ -66,6 +69,7 @@ export default class Login extends Component {
     return (
         
       <View style={styles.container}>
+      <ImageBackground style={{width: '100%', height: '100%'}} source={taco}>
       <ButtonContainer>
             <SubHeading style={styles.header} >
             You are <BoldText>{loggedIn ? '' : 'NOT '}logged in.</BoldText>
@@ -77,6 +81,7 @@ export default class Login extends Component {
                 {loggedIn ? 'Log Out' : 'Log In'}
             </Button>
         </ButtonContainer>
+        </ImageBackground>
       </View>
       
     );
