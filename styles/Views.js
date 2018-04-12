@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
+// THIS IS THE CONTAINER THAT WRAPS EACH ENTIRE COMOPONENT
 export const MainContainer = styled.View`
     background: #efeff4;
     width: 100%;
     height: 100%
 `
 // #efeff4 - light blue, 4D3D2D brown, 
+
+// THIS IS THE BIG WHITE BOX CONTAINER THAT WRAPS MOST OF THE DISPLAYED DATA
 export const DetailViewContainer = styled.View`
     min-height: 80;
     max-height: 400;
@@ -22,12 +25,14 @@ export const DetailViewContainer = styled.View`
     shadowRadius: 2;
     overflow: scroll;
 `
+
+// USED INSIDE THE DETAIL VIEW CONTAINER INSIDE THE ORDER CONFIRM COMPONENT
 export const AccountDetailsView = styled.View`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
 `
-
+// USED IN THE HISTORY COMPONENT INSIDE THE DETAIL VIEW CONTAINER - WRAPPING THE HISTORY TEXTS
 export const ColumnContainer = styled.View`
     display: flex;
     flex-direction: row;

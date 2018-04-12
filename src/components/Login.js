@@ -14,6 +14,7 @@ import Order from './Order';
 import Button from './Button';
 import { ButtonContainer } from '../../styles/Buttons';
 import { BoldText, SubHeading } from '../../styles/Texts';
+import { MainContainer } from '../../styles/Views';
 
 var credentials = require('../../secrets');
 const auth0 = new Auth0(credentials);
@@ -26,7 +27,8 @@ export default class Login extends Component {
 
   redirect = () => {
       console.log('redirect is running')
-    this.props.navigation.navigate('Order')
+      console.log(this.props.navigation)
+    this.props.navigation.navigate('Home')
   }
 
   _onLogin = () => {
@@ -65,19 +67,18 @@ export default class Login extends Component {
         
       <View style={styles.container}>
       <ButtonContainer>
-        {/* <Text style={styles.header}>Login</Text> */}
-        <SubHeading style={styles.header} >
-          You are <BoldText>{loggedIn ? '' : 'NOT '}logged in.</BoldText>
-        </SubHeading>
-        
+            <SubHeading style={styles.header} >
+            You are <BoldText>{loggedIn ? '' : 'NOT '}logged in.</BoldText>
+            </SubHeading>
             <Button
-            onPress={loggedIn ? this._onLogout : this._onLogin}
-            title={loggedIn ? 'Log Out' : 'Log In'}
-            >
-            {loggedIn ? 'Log Out' : 'Log In'}
+                onPress={loggedIn ? this._onLogout : this._onLogin}
+                title={loggedIn ? 'Log Out' : 'Log In'}
+                >
+                {loggedIn ? 'Log Out' : 'Log In'}
             </Button>
         </ButtonContainer>
       </View>
+      
     );
   }
 }
@@ -87,7 +88,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
+    marginBottom: 20
   },
   header: {
     fontSize: 20,

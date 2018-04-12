@@ -23,7 +23,7 @@ export default class OrderDetails extends Component {
 
     render() {
         const itemName = this.state.items.map((items, i) => {
-            return <Text style={ styles.orderDetailText } key={i}>{ `Item: ${items.name}    Price: $${items.price}` }</Text>
+            return <Text style={ styles.orderDetailText } key={i}>{ `Item: ${items.name}` }</Text>
         })
 
         const itemPrice = this.state.items.map((items, i) => {

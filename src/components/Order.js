@@ -22,6 +22,7 @@ export default class Order extends Component {
     }
 
     goToOrderConfirm = () => {
+        console.log(this.props.navigation)
         this.props.navigation.navigate('OrderConfirm')
     }
 

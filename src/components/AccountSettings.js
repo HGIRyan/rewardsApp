@@ -65,14 +65,18 @@ class Account extends Component {
                  <View style={ styles.profilePic } >
                     <Image source={profilePic}  />
                  </View>
+                 <TwoButtonContainer>
                 <AccountInput 
+                    style={styles.names}
                     onChangeText={(newFirstName) => this.setState({newFirstName})}
                     value={user.firstname}>
                 </AccountInput>
                 <AccountInput 
+                    style={styles.names}
                     onChangeText={(newLastName) => this.setState({newLastName})}
                     value={user.lastname }>
                 </AccountInput>
+                </TwoButtonContainer>
                 <AccountInput 
                     onChangeText={(newPhone) => this.setState({newPhone})}
                     value={user.phone}>
@@ -120,5 +124,8 @@ const styles = {
         alignSelf: 'center',
         height: 200,
         width: 200
+    },
+    names: {
+        width: '47%'
     }
  }

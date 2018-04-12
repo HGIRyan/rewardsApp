@@ -1,10 +1,11 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
 import { getUserInfo } from '../../ducks/reducer';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Image } from 'react-native';
 import { MainHeading } from '../../styles/Texts';
 import { MainContainer } from '../../styles/Views';
 import Login from './Login';
+import taco from '../assests/taco.jpg';
 
 class Home extends Component {
     state={}
@@ -15,9 +16,10 @@ class Home extends Component {
         return(
         <MainContainer>
             <MainHeading >
-                Home Page
+                Rewards App
             </MainHeading>
-            <Login/>
+            <Image source={taco} />
+            {/* <Login/> */}
         </MainContainer>
         )
     }
