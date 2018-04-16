@@ -1,7 +1,6 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Image } from 'react-native';
-// import { Icon } from 'react-native-elements';
 import Home from './src/components/Home';
 import Order from './src/components/Order';
 import OrderConfirm from './src/components/OrderConfirm';
@@ -13,6 +12,8 @@ import orderIcon from './src/assests/order.png';
 import accountIcon from './src/assests/account.png';
 import historyIcon from './src/assests/history.png';
 import Login from './src/components/Login';
+import Photos from './src/components/Photos';
+import PhotoDetails from './src/components/PhotoDetails';
 
 export const OrderStack = StackNavigator({
     Order: {
@@ -49,7 +50,6 @@ export const AccountStack = StackNavigator({
         }
     }
 })
-
 
 
 // resource for this found at https://www.youtube.com/watch?v=C96piR3FRww or https://hackernoon.com/getting-started-with-react-navigation-the-navigation-solution-for-react-native-ea3f4bd786a4
@@ -93,3 +93,12 @@ export const LoginStack = StackNavigator({
 },
     { headerMode: 'none'}
 )
+
+export const PhotoStack = StackNavigator({
+    Photos: {
+        screen: Photos,
+    },
+    PhotoDetails: {
+        screen: PhotoDetails
+    }
+})

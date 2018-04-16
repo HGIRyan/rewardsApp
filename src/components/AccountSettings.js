@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
-
+import Button  from './Button';
 import { updateUserInfo } from '../../ducks/reducer';
 import { AccountInput } from '../../styles/Inputs';
 import { MainHeading } from '../../styles/Texts';
-import { TwoButtonContainer } from '../../styles/Buttons';
+import { TwoButtonContainer, ButtonContainer } from '../../styles/Buttons';
 import HalfButton from './HalfButton';
 import { HalfButtonPush, HalfButtonText } from '../../styles/Buttons';
 import { MainContainer } from '../../styles/Views';
@@ -30,6 +30,12 @@ class Account extends Component {
     goToAccount = () => {
         this.props.navigation.pop()
     }
+
+    goToPhotos = () => {
+        this.props.navigation.navigate('Photo');
+        console.log('upload photo button')
+    }
+
     saveUser(){
         const user = this.props.user;
 
@@ -66,6 +72,11 @@ class Account extends Component {
                  <Image source=
                     {{ uri: user.picture}}  
                     style={{width: 200, height: 200, borderRadius:100}} />
+                        <ButtonContainer>
+                            <Button onPress={() => this.goToPhotos() } >
+                              upload images
+                             </Button>
+                         </ButtonContainer>
                  </View>
                  <TwoButtonContainer>
                 <AccountInput 
