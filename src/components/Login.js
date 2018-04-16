@@ -43,11 +43,30 @@ export default class Login extends Component {
         audience: 'https://rewards-app-project.auth0.com/userinfo',
         useBrowser: true
       })
-      .then(_ => {
-        this.setState({ accessToken: credentials.accessToken })
-        this.redirect();
+      .then( data => {
+        auth0
+        .auth
+        .userInfo({ token: data.accessToken })
+        .then(this.setState({ accessToken: data.accessToken }))
+        .then(userInfo=>{
+          this.setState({
+            userInfo:userInfo
+          })
+          this.redirect();
+          console.log('STATE::',this.state)
+        })
+        .catch(console.error)
+
+        // this.setState({ accessToken: credentials.accessToken })
 
       })
+
+     
+      // .then(_ => {
+      //   this.setState({ accessToken: credentials.accessToken })
+      //   this.redirect();
+      // })
+
       .catch(error => console.log(error));
   };
 
