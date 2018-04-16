@@ -6,7 +6,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  ImageBackground
 } from 'react-native';
 import Auth0 from 'react-native-auth0';
 import Home from './Home';
@@ -14,6 +15,9 @@ import Order from './Order';
 import Button from './Button';
 import { ButtonContainer } from '../../styles/Buttons';
 import { BoldText, SubHeading } from '../../styles/Texts';
+import { MainContainer } from '../../styles/Views';
+import taco from '../assests/taco.jpg';
+
 
 var credentials = require('../../secrets');
 const auth0 = new Auth0(credentials);
@@ -26,7 +30,8 @@ export default class Login extends Component {
 
   redirect = () => {
       console.log('redirect is running')
-    this.props.navigation.navigate('Order')
+      console.log(this.props.navigation)
+    this.props.navigation.navigate('Home')
   }
 
   _onLogin = () => {
@@ -64,20 +69,21 @@ export default class Login extends Component {
     return (
         
       <View style={styles.container}>
+      <ImageBackground style={{width: '100%', height: '100%'}} source={taco}>
       <ButtonContainer>
-        {/* <Text style={styles.header}>Login</Text> */}
-        <SubHeading style={styles.header} >
-          You are <BoldText>{loggedIn ? '' : 'NOT '}logged in.</BoldText>
-        </SubHeading>
-        
+            <SubHeading style={styles.header} >
+            You are <BoldText>{loggedIn ? '' : 'NOT '}logged in.</BoldText>
+            </SubHeading>
             <Button
-            onPress={loggedIn ? this._onLogout : this._onLogin}
-            title={loggedIn ? 'Log Out' : 'Log In'}
-            >
-            {loggedIn ? 'Log Out' : 'Log In'}
+                onPress={loggedIn ? this._onLogout : this._onLogin}
+                title={loggedIn ? 'Log Out' : 'Log In'}
+                >
+                {loggedIn ? 'Log Out' : 'Log In'}
             </Button>
         </ButtonContainer>
+        </ImageBackground>
       </View>
+      
     );
   }
 }
@@ -87,7 +93,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
+    marginBottom: 20
   },
   header: {
     fontSize: 20,

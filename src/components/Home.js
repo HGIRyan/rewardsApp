@@ -1,10 +1,12 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
 import { getUserInfo } from '../../ducks/reducer';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, ImageBackground } from 'react-native';
 import { MainHeading } from '../../styles/Texts';
-import { MainContainer } from '../../styles/Views';
+import { MainContainer, DetailViewContainer } from '../../styles/Views';
 import Login from './Login';
+import taco from '../assests/taco.jpg';
+import pico from '../assests/pico.jpg';
 
 class Home extends Component {
     state={}
@@ -14,10 +16,18 @@ class Home extends Component {
     render(){
         return(
         <MainContainer>
+            <ImageBackground style={{width: '100%', height: '100%'}} source={pico}>
+            <DetailViewContainer style={{backgroundColor: 'rgba(239, 239, 244, 0.7)', marginTop: 200}} >
             <MainHeading >
-                Home Page
+                Rewards App
             </MainHeading>
-            <Login/>
+            <MainHeading >
+                Welcome to the Best Mexican Food App in South Provo
+            </MainHeading>
+            </DetailViewContainer>
+            </ImageBackground>
+            
+            {/* <Login/> */}
         </MainContainer>
         )
     }
