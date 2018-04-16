@@ -17,12 +17,14 @@ import { ButtonContainer } from '../../styles/Buttons';
 import { BoldText, SubHeading } from '../../styles/Texts';
 import { MainContainer } from '../../styles/Views';
 import taco from '../assests/taco.jpg';
+import { connect } from 'react-redux';
+
+import { sendUserInfo } from '../../ducks/reducer';
 
 
 var credentials = require('../../secrets');
 const auth0 = new Auth0(credentials);
-
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { accessToken: null };
@@ -106,6 +108,15 @@ export default class Login extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    userInfo: state.userInfo
+  }
+}
+
+export default connect(mapStateToProps, { sendUserInfo })(Login);
 
 const styles = StyleSheet.create({
   container: {
