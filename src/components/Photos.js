@@ -1,41 +1,63 @@
 import React, { Component } from 'react';
-import { Image, View, Text, ScrollView, Button, CameraRoll } from 'react-native';
+import { Image, View, Text, ScrollView, Button, CameraRoll, TouchableOpacity } from 'react-native';
 
 export default class Photos extends Component{
 
     state = {
-        photos: []
+        photos: [],
+        photoURI: ''
     }
 
-    _handleButtonPress = () => {
+    componentDidUpdate = (prevProps, prevState) => {
+      if (this.state.photoURI !== '') {
+        this.props.navigation.navigate('AccountSettings', { photoURI: this.state.photoURI })
+      }
+    }
+    
+    componentWillMount = () => {
+      this._handleButtonPress();
+    }
+    
+     _handleButtonPress = () => {
         CameraRoll.getPhotos({
-            first: 20,
-            assetType: 'Photos',
-          })
-          .then(response => {
-            this.setState({ photos: response.edges });
-          })
-          .catch((err) => {
-             //Error Loading Images
-          });
-        };
-     render() {
-        // console.log(this.state)
+        first: 20,
+                assetType: 'Photos',
+              })
+              .then(response => {
+                this.setState({ photos: response.edges });
+              })
+              .catch((err) => {
+                 //Error Loading Images
+              });
+            };
+    
+    
 
+    addPhoto = (photo) => {
+        this.setState({ photoURI: photo })
+        console.log(this.state.photoURI)
+        console.log('this onpress is firing')
+    }
+
+     render() {
+        // console.log(this.state.photoURI)
       return (
         <View>
-          <Button title="Load Images" onPress={() => this._handleButtonPress()} />
+          {/* <Button title="Load Images" onPress={() => this._handleButtonPress()} /> */}
           <ScrollView>
             {this.state.photos.map((p, i) => {
             return (
-              <Image
+            <TouchableOpacity                     
                 key={i}
-                style={{
-                  width: 300,
-                  height: 100,
-                }}
-                source={{ uri: p.node.image.uri }}
-              />
+                onPress={ () => this.addPhoto(p.node.image.uri) }>
+                <Image
+                    style={{
+                    width: 200,
+                    height: 200,
+                    }}
+                    source={{ uri: p.node.image.uri }}
+                />
+              </TouchableOpacity>
             );
           })}
           </ScrollView>

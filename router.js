@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { Image } from 'react-native';
+import { Image, Button } from 'react-native';
 import Home from './src/components/Home';
 import Order from './src/components/Order';
 import OrderConfirm from './src/components/OrderConfirm';
@@ -48,6 +48,14 @@ export const AccountStack = StackNavigator({
             tabBarLabel: "Account",
             tabBarIcon: () => <Image source={ accountIcon } />
         }
+    },
+    Photos: {
+        screen: Photos,
+        navigationOptions: {
+            title: 'Upload Photo',
+            tabBarLabel: "Account",
+            tabBarIcon: () => <Image source={ accountIcon } />
+    }
     }
 })
 
@@ -57,11 +65,16 @@ export const AccountStack = StackNavigator({
 export const Tabs = TabNavigator({
     Home: {
         screen: Home,
-        navigationOptions: {
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ tintColor }) => <Image source={ homeIcon } name='Home' size={15} color={tintColor} />
-
+        navigationOptions: ({navigation}) => {
+            return {
+                tabBarLabel: 'Home',
+                tabBarIcon: ({ tintColor }) => <Image source={ homeIcon } name='Home' size={15} color={tintColor} />,
+                headerRight: (<Button onPress={() => nagivation.navigate('Login')} title={'Logout'}/>)
+            }
         }
+        
+            
+        
     },
     Order: {
         screen: OrderStack,
@@ -82,16 +95,16 @@ export const Tabs = TabNavigator({
 })
 
 export const LoginStack = StackNavigator({
-    Login: {
-        screen: Login,
-        headerMode: 'none',
+    // Login: {
+    //     screen: Login,
+    //     headerMode: 'none',
 
-    },
+    // },
     Tabs: {
         screen: Tabs,
     },
 },
-    { headerMode: 'none'}
+    { headerMode: 'none'},
 )
 
 export const PhotoStack = StackNavigator({

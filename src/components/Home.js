@@ -11,10 +11,10 @@ import pico from '../assests/chips.jpg';
 
 class Home extends Component {
     state={}
-    componentWillMount() {
-        this.props.getUserInfo()
+    // componentWillMount() {
+    //     this.props.getUserInfo()
 
-    }
+    // }
     render() {
         return(
         <MainContainer>
