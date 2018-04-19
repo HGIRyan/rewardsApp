@@ -12,6 +12,7 @@ import orderIcon from './src/assests/order.png';
 import accountIcon from './src/assests/account.png';
 import historyIcon from './src/assests/history.png';
 import Login from './src/components/Login';
+import Waiting from './src/components/Waiting';
 import Photos from './src/components/Photos';
 import PhotoDetails from './src/components/PhotoDetails';
 
@@ -95,11 +96,19 @@ export const Tabs = TabNavigator({
 })
 
 export const LoginStack = StackNavigator({
-    // Login: {
-    //     screen: Login,
-    //     headerMode: 'none',
+    Login: {
+        screen: Login,
+        headerMode: 'none',
+        navigationOptions:{
+            gesturesEnabled: false
+        }
+    },
+    Waiting: {
+        screen: Waiting,
+        headerMode: 'none'
 
-    // },
+
+    },
     Tabs: {
         screen: Tabs,
         navigationOptions:{
@@ -107,7 +116,7 @@ export const LoginStack = StackNavigator({
         }
     },
 },
-    { headerMode: 'none'},
+    { headerMode: 'none'}
 )
 
 export const PhotoStack = StackNavigator({

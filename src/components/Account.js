@@ -29,7 +29,7 @@ class Account extends Component {
     render() {
         const user = this.props.user;
         var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
-console.log(user.picture)
+console.log('USER:',user)
 
         return(
             <MainContainer> 
