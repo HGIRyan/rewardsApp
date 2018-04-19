@@ -102,6 +102,9 @@ export const LoginStack = StackNavigator({
     // },
     Tabs: {
         screen: Tabs,
+        navigationOptions:{
+            gesturesEnabled: false
+        }
     },
 },
     { headerMode: 'none'},

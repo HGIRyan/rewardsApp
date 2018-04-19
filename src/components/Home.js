@@ -12,7 +12,7 @@ import pico from '../assests/chips.jpg';
 class Home extends Component {
     state={}
     componentWillMount() {
-        this.props.getUserInfo()
+        // this.props.getUserInfo()
     }
 
     goToLogin = () => {
