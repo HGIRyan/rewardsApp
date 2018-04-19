@@ -53,8 +53,8 @@ export function addToCart(val) {
         payload: val
     }
 }
-export function sendUserInfo(id,body) {
-    const userData = axios.post(`http://localhost:3050/api/user/info/${id}`,body)
+export function sendUserInfo(body) {
+    const userData = axios.post( BASEURL + `/api/user/info/`,body)
         .then(res => {
             return res.data
         })
@@ -87,7 +87,7 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { cart: newItem });
 
         case SEND_USER_INFO + '_FULFILLED':
-            return Object.assign({}, state, { userInfo: action.payload });s
+            return Object.assign({}, state, { user: action.payload });
 
         default:
             return state;

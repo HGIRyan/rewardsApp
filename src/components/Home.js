@@ -11,7 +11,7 @@ import pico from '../assests/pico.jpg';
 class Home extends Component {
     state={}
     componentWillMount() {
-        this.props.getUserInfo()
+        // this.props.getUserInfo()
     }
     render(){
         return(

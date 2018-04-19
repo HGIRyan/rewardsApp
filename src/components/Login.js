@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Alert,
   AppRegistry,
-//   Button,
+  //   Button,
   Platform,
   StyleSheet,
   Text,
@@ -27,48 +27,55 @@ const auth0 = new Auth0(credentials);
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { accessToken: null };
+    this.state = {
+      accessToken: null,
+      userInfo: {},
+      fullProfile: {}
+    };
   }
 
   redirect = () => {
-      console.log('redirect is running')
-      console.log(this.props.navigation)
+    console.log('redirect is running')
+    console.log(this.props.navigation)
     this.props.navigation.navigate('Home')
   }
 
   _onLogin = () => {
-    console.log('working in login')
+    let info = this.state.userInfo
+    
 
     auth0.webAuth
       .authorize({
-        scope: 'openid profile',
+        scope: 'openid profile email',
         audience: 'https://rewards-app-project.auth0.com/userinfo',
         useBrowser: true
       })
-      .then( data => {
+      .then(data => {
         auth0
-        .auth
-        .userInfo({ token: data.accessToken })
-        .then(this.setState({ accessToken: data.accessToken }))
-        .then(userInfo=>{
-          this.setState({
-            userInfo:userInfo
+          .auth
+          .userInfo({ token: data.accessToken })
+          .then(this.setState({ accessToken: data.accessToken }))
+          .then(userInfo => {
+            this.setState({
+              userInfo: userInfo
+            })
+            this.redirect();
+            console.log('STATE::', this.state)
           })
-          this.redirect();
-          console.log('STATE::',this.state)
-        })
-        .catch(console.error)
-
-        // this.setState({ accessToken: credentials.accessToken })
-
+          .then(send => {
+            let info = this.state.userInfo
+            let body = {
+              givenName: info.givenName,
+              familyName: info.familyName,
+              email: info.email,
+              picture: info.picture,
+              sub: info.sub.split('|')[1]
+            }
+            console.log('BODY:: ', body)
+            this.props.sendUserInfo(body)
+          })
+          .catch(console.error)
       })
-
-     
-      // .then(_ => {
-      //   this.setState({ accessToken: credentials.accessToken })
-      //   this.redirect();
-      // })
-
       .catch(error => console.log(error));
   };
 
@@ -87,24 +94,25 @@ class Login extends Component {
 
   render() {
     let loggedIn = this.state.accessToken === null ? false : true;
+    // console.log(this.state)
     return (
-        
+
       <View style={styles.container}>
-      <ImageBackground style={{width: '100%', height: '100%'}} source={taco}>
-      <ButtonContainer>
+        <ImageBackground style={{ width: '100%', height: '100%' }} source={taco}>
+          <ButtonContainer>
             <SubHeading style={styles.header} >
-            You are <BoldText>{loggedIn ? '' : 'NOT '}logged in.</BoldText>
+              You are <BoldText>{loggedIn ? '' : 'NOT '}logged in.</BoldText>
             </SubHeading>
             <Button
-                onPress={loggedIn ? this._onLogout : this._onLogin}
-                title={loggedIn ? 'Log Out' : 'Log In'}
-                >
-                {loggedIn ? 'Log Out' : 'Log In'}
+              onPress={loggedIn ? this._onLogout : this._onLogin}
+              title={loggedIn ? 'Log Out' : 'Log In'}
+            >
+              {loggedIn ? 'Log Out' : 'Log In'}
             </Button>
-        </ButtonContainer>
+          </ButtonContainer>
         </ImageBackground>
       </View>
-      
+
     );
   }
 }
