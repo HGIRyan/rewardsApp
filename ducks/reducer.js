@@ -6,7 +6,9 @@ const initialState = {
     user: [],
     cart: [],
     usersOrder: [],
-    userInfo: {}
+    userInfo: {},
+    getUserInfoStatus: '',
+    updateUserStatus: ''
 }
 
 // --ACTION CONSTRAINTS--
@@ -27,8 +29,8 @@ export function getUserInfo() {
         payload: userData
     }
 }
-export function updateUserInfo(body) {
-    const updatedUserData = axios.put(BASEURL + '/api/update/user/1', body)
+export function updateUserInfo(id, body) {
+    const updatedUserData = axios.put(BASEURL + `/api/update/user/${id}`, body)
         .then(res => {
             return res.data
         })
@@ -75,7 +77,11 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { user: action.payload });
 
         case UPDATE_USER + '_FULFILLED':
-            return Object.assign({}, state, { user: action.payload });
+            return Object.assign({}, state, { user: action.payload , updateUserStatus: action.type});
+        case UPDATE_USER + '_PENDING':
+            return Object.assign({}, state, {updateUserStatus: action.type});
+        case UPDATE_USER + '_REJECTED':
+            return Object.assign({}, state, {updateUserStatus: action.type});
 
         case NEW_ORDER + '_FULFILLED':
             return Object.assign({}, state, { usersOrder: action.payload });
@@ -86,9 +92,13 @@ export default function reducer(state = initialState, action) {
             console.log(newItem)
             return Object.assign({}, state, { cart: newItem });
 
-        case SEND_USER_INFO + '_FULFILLED':
-            return Object.assign({}, state, { user: action.payload });
-
+            case SEND_USER_INFO + '_PENDING':
+                return Object.assign({}, state, {getUserInfoStatus: action.type  });
+            case SEND_USER_INFO + '_REJECTED':
+                return Object.assign({}, state, { getUserInfoStatus: action.type  });
+            case SEND_USER_INFO + '_FULFILLED':
+               return Object.assign({}, state, { user: action.payload,  getUserInfoStatus: action.type  });
+            
         default:
             return state;
     }

@@ -17,6 +17,7 @@ import { ButtonContainer } from '../../styles/Buttons';
 import { BoldText, SubHeading } from '../../styles/Texts';
 import { MainContainer } from '../../styles/Views';
 import taco from '../assests/taco.jpg';
+import salsa from '../assests/salsa.jpg';
 import { connect } from 'react-redux';
 
 import { sendUserInfo } from '../../ducks/reducer';
@@ -34,15 +35,18 @@ class Login extends Component {
     };
   }
 
-  redirect = () => {
+  // componentWillUpdate(){
+  //    this.redirect()
+  // }
+  redirect = (path) => {
     console.log('redirect is running')
-    console.log(this.props.navigation)
-    this.props.navigation.navigate('Home')
+    // console.log(this.props.navigation)
+    this.props.navigation.navigate(path)
   }
 
   _onLogin = () => {
     let info = this.state.userInfo
-    
+
 
     auth0.webAuth
       .authorize({
@@ -59,8 +63,6 @@ class Login extends Component {
             this.setState({
               userInfo: userInfo
             })
-            this.redirect();
-            console.log('STATE::', this.state)
           })
           .then(send => {
             let info = this.state.userInfo
@@ -71,56 +73,61 @@ class Login extends Component {
               picture: info.picture,
               sub: info.sub.split('|')[1]
             }
-            console.log('BODY:: ', body)
             this.props.sendUserInfo(body)
           })
           .catch(console.error)
       })
+      .catch(error => {
+        console.log(error)
+        this.redirect('Login')
+      }
+      );
+      this.redirect('Waiting')
+};
+
+_onLogout = () => {
+  if (Platform.OS === 'android') {
+    this.setState({ accessToken: null });
+  } else {
+    auth0.webAuth
+      .clearSession({})
+      .then(success => {
+        this.setState({ accessToken: null });
+      })
       .catch(error => console.log(error));
-  };
-
-  _onLogout = () => {
-    if (Platform.OS === 'android') {
-      this.setState({ accessToken: null });
-    } else {
-      auth0.webAuth
-        .clearSession({})
-        .then(success => {
-          this.setState({ accessToken: null });
-        })
-        .catch(error => console.log(error));
-    }
-  };
-
-  render() {
-    let loggedIn = this.state.accessToken === null ? false : true;
-    // console.log(this.state)
-    return (
-
-      <View style={styles.container}>
-        <ImageBackground style={{ width: '100%', height: '100%' }} source={taco}>
-          <ButtonContainer>
-            <SubHeading style={styles.header} >
-              You are <BoldText>{loggedIn ? '' : 'NOT '}logged in.</BoldText>
-            </SubHeading>
-            <Button
-              onPress={loggedIn ? this._onLogout : this._onLogin}
-              title={loggedIn ? 'Log Out' : 'Log In'}
-            >
-              {loggedIn ? 'Log Out' : 'Log In'}
-            </Button>
-          </ButtonContainer>
-        </ImageBackground>
-      </View>
-
-    );
   }
+};
+
+render() {
+  let loggedIn = this.state.accessToken === null ? false : true;
+  console.log('getUserInfoStatus:', this.props.getUserInfoStatus)
+
+  return (
+    <View style={styles.container}>
+      <ImageBackground style={{ width: '100%', height: '100%' }} source={taco} >
+        <ButtonContainer>
+          <SubHeading style={styles.header} >
+            You are <BoldText>{loggedIn ? '' : 'NOT '}logged in.</BoldText>
+          </SubHeading>
+          <Button
+            onPress={loggedIn ? this._onLogout : this._onLogin}
+            title={loggedIn ? 'Log Out' : 'Log In'}
+          >
+            {loggedIn ? 'Log Out' : 'Log In'}
+          </Button>
+        </ButtonContainer>
+      </ImageBackground>
+    </View>
+
+  );
+}
 }
 
 function mapStateToProps(state) {
   return {
     user: state.user,
-    userInfo: state.userInfo
+    userInfo: state.userInfo,
+    getUserInfoStatus: state.getUserInfoStatus
   }
 }
 
