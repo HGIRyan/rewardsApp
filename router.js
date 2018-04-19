@@ -1,7 +1,6 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { Image } from 'react-native';
-// import { Icon } from 'react-native-elements';
+import { Image, Button } from 'react-native';
 import Home from './src/components/Home';
 import Order from './src/components/Order';
 import OrderConfirm from './src/components/OrderConfirm';
@@ -13,6 +12,8 @@ import orderIcon from './src/assests/order.png';
 import accountIcon from './src/assests/account.png';
 import historyIcon from './src/assests/history.png';
 import Login from './src/components/Login';
+import Photos from './src/components/Photos';
+import PhotoDetails from './src/components/PhotoDetails';
 
 export const OrderStack = StackNavigator({
     Order: {
@@ -47,9 +48,16 @@ export const AccountStack = StackNavigator({
             tabBarLabel: "Account",
             tabBarIcon: () => <Image source={ accountIcon } />
         }
+    },
+    Photos: {
+        screen: Photos,
+        navigationOptions: {
+            title: 'Upload Photo',
+            tabBarLabel: "Account",
+            tabBarIcon: () => <Image source={ accountIcon } />
+    }
     }
 })
-
 
 
 // resource for this found at https://www.youtube.com/watch?v=C96piR3FRww or https://hackernoon.com/getting-started-with-react-navigation-the-navigation-solution-for-react-native-ea3f4bd786a4
@@ -57,11 +65,16 @@ export const AccountStack = StackNavigator({
 export const Tabs = TabNavigator({
     Home: {
         screen: Home,
-        navigationOptions: {
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ tintColor }) => <Image source={ homeIcon } name='Home' size={15} color={tintColor} />
-
+        navigationOptions: ({navigation}) => {
+            return {
+                tabBarLabel: 'Home',
+                tabBarIcon: ({ tintColor }) => <Image source={ homeIcon } name='Home' size={15} color={tintColor} />,
+                headerRight: (<Button onPress={() => nagivation.navigate('Login')} title={'Logout'}/>)
+            }
         }
+        
+            
+        
     },
     Order: {
         screen: OrderStack,
@@ -82,11 +95,11 @@ export const Tabs = TabNavigator({
 })
 
 export const LoginStack = StackNavigator({
-    Login: {
-        screen: Login,
-        headerMode: 'none',
+    // Login: {
+    //     screen: Login,
+    //     headerMode: 'none',
 
-    },
+    // },
     Tabs: {
         screen: Tabs,
         navigationOptions:{
@@ -94,5 +107,14 @@ export const LoginStack = StackNavigator({
         }
     },
 },
-    { headerMode: 'none'}
+    { headerMode: 'none'},
 )
+
+export const PhotoStack = StackNavigator({
+    Photos: {
+        screen: Photos,
+    },
+    PhotoDetails: {
+        screen: PhotoDetails
+    }
+})
