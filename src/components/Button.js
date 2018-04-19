@@ -14,7 +14,7 @@ const Button = ({ onPress, children }) => {
 const styles = {
     button: {
         position: 'relative',
-        bottom: 0
+        bottom: 10
     }
 }
 

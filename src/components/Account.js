@@ -18,7 +18,7 @@ class Account extends Component {
         DOB: ''
     }
     componentWillMount() {
-        this.props.getUserInfo()
+        // this.props.getUserInfo()
     }
 
     goToAccountSettings = () => {
@@ -29,7 +29,7 @@ class Account extends Component {
     render() {
         const user = this.props.user;
         var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
-console.log(user.picture)
+console.log('USER:',user)
 
         return(
             <MainContainer> 
@@ -81,7 +81,7 @@ console.log(user.picture)
                             Date of Birth:
                         </BoldText>
                         <SubHeading >
-                            { !user.firstname ? null:
+                            { !user.birthday ? null:
                             new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)
                             
                             }

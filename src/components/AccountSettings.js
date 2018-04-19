@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { connect } from 'react-redux';
-
+import Button  from './Button';
 import { updateUserInfo } from '../../ducks/reducer';
 import { AccountInput } from '../../styles/Inputs';
 import { MainHeading } from '../../styles/Texts';
-import { TwoButtonContainer } from '../../styles/Buttons';
+import { TwoButtonContainer, ButtonContainer } from '../../styles/Buttons';
 import HalfButton from './HalfButton';
 import { HalfButtonPush, HalfButtonText } from '../../styles/Buttons';
 import { MainContainer } from '../../styles/Views';
@@ -17,6 +17,7 @@ class Account extends Component {
 
     state = {
         // name: 'michael',
+        // picture: this.props.user.picture,
         phone: 'phone number',
         email: 'email address',
         DOB: 'MM/DD/YYYY',
@@ -27,21 +28,35 @@ class Account extends Component {
         newDOB: ''
     }
 
+    // componentWillMount = () => {
+    //     console.log(this.state.navigation)
+    //   this.props.navigation ? this.setState({picture: this.props.state}) : null 
+    // }
+    
+
     goToAccount = () => {
-        this.props.navigation.pop()
+        this.props.navigation.navigate('Account')
     }
+
+    goToPhotos = () => {
+        this.props.navigation.navigate('Photos');
+        console.log('upload photo button')
+    }
+
     saveUser(){
         const user = this.props.user;
+        const userPic = this.props.navigation.state.params
 
         let userUpdatedInfo = {
             
             "firstname": ( this.state.newFirstName.length >=1 ? this.state.newFirstName : user.firstname ) ,
             "lastname":( this.state.newLastName.length >=1 ? this.state.newLastName : user.lastname ) ,
             "email":( this.state.newEmail.length >=1 ? this.state.newEmail : user.email ) ,
-            "picture":"https://lh5.googleusercontent.com/-2pmHCiYS-3s/AAAAAAAAAAI/AAAAAAAAX20/J7yVcv6GHn8/photo.jpg",
+            "picture":!userPic ?  user.picture :   userPic.photoURI,
             "birthday":( this.state.newDOB.length >=1 ? this.state.newDOB : user.birthday ) ,
             "phone":( this.state.newPhone.length >=1 ? this.state.newPhone : user.phone ) ,
         }
+        console.log('userUpdatedInfo', userUpdatedInfo)
         this.props.updateUserInfo(userUpdatedInfo)
         .then( _=> {
             return this.goToAccount()
@@ -49,8 +64,11 @@ class Account extends Component {
     }
 
     render() {
+        console.log(this.props.navigation ? this.props.navigation: null)
         const user = this.props.user;
         var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
+        const userPic = this.props.navigation.state.params
+        console.log("testStatus:", this.props.testStatus)
 
         // console.log(this.state.phone)
         // console.log(this.state.email)
@@ -64,17 +82,26 @@ class Account extends Component {
                  </MainHeading>
                  <View style={ styles.profilePic } >
                  <Image source=
-                    {{ uri: user.picture}}  
-                    style={{width: 200, height: 200, borderRadius:100}} />
+                    {{ uri: !userPic ?  user.picture :   userPic.photoURI }}  
+                    style={{width: 200, height: 200, borderRadius: 100}} />
+                        <ButtonContainer style={{ width: '70%', alignSelf: 'center' }}>
+                            <Button onPress={() => this.goToPhotos() }>
+                              upload images
+                             </Button>
+                         </ButtonContainer>
                  </View>
+                 <TwoButtonContainer>
                 <AccountInput 
+                    style={styles.names}
                     onChangeText={(newFirstName) => this.setState({newFirstName})}
                     value={user.firstname}>
                 </AccountInput>
                 <AccountInput 
+                    style={styles.names}
                     onChangeText={(newLastName) => this.setState({newLastName})}
                     value={user.lastname }>
                 </AccountInput>
+                </TwoButtonContainer>
                 <AccountInput 
                     onChangeText={(newPhone) => this.setState({newPhone})}
                     value={user.phone}>
@@ -111,7 +138,8 @@ class Account extends Component {
 }
 function mapStateToProps(state) {
     return {
-      user: state.user
+      user: state.user,
+      testStatus: state.testStatus
     }
   }
   
@@ -121,6 +149,9 @@ const styles = {
     profilePic: {
         alignSelf: 'center',
         height: 200,
-        width: 200
+        width: 200,
+    },
+    names: {
+        width: '47%'
     }
  }

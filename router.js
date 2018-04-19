@@ -1,7 +1,6 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { Image } from 'react-native';
-// import { Icon } from 'react-native-elements';
+import { Image, Button } from 'react-native';
 import Home from './src/components/Home';
 import Order from './src/components/Order';
 import OrderConfirm from './src/components/OrderConfirm';
@@ -12,6 +11,10 @@ import homeIcon from './src/assests/home2.png';
 import orderIcon from './src/assests/order.png';
 import accountIcon from './src/assests/account.png';
 import historyIcon from './src/assests/history.png';
+import Login from './src/components/Login';
+import Waiting from './src/components/Waiting';
+import Photos from './src/components/Photos';
+import PhotoDetails from './src/components/PhotoDetails';
 
 export const OrderStack = StackNavigator({
     Order: {
@@ -46,6 +49,14 @@ export const AccountStack = StackNavigator({
             tabBarLabel: "Account",
             tabBarIcon: () => <Image source={ accountIcon } />
         }
+    },
+    Photos: {
+        screen: Photos,
+        navigationOptions: {
+            title: 'Upload Photo',
+            tabBarLabel: "Account",
+            tabBarIcon: () => <Image source={ accountIcon } />
+    }
     }
 })
 
@@ -55,11 +66,16 @@ export const AccountStack = StackNavigator({
 export const Tabs = TabNavigator({
     Home: {
         screen: Home,
-        navigationOptions: {
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ tintColor }) => <Image source={ homeIcon } name='Home' size={15} color={tintColor} />
-
+        navigationOptions: ({navigation}) => {
+            return {
+                tabBarLabel: 'Home',
+                tabBarIcon: ({ tintColor }) => <Image source={ homeIcon } name='Home' size={15} color={tintColor} />,
+                headerRight: (<Button onPress={() => nagivation.navigate('Login')} title={'Logout'}/>)
+            }
         }
+        
+            
+        
     },
     Order: {
         screen: OrderStack,
@@ -77,4 +93,37 @@ export const Tabs = TabNavigator({
         }
     },
     
+})
+
+export const LoginStack = StackNavigator({
+    Login: {
+        screen: Login,
+        headerMode: 'none',
+        navigationOptions:{
+            gesturesEnabled: false
+        }
+    },
+    Waiting: {
+        screen: Waiting,
+        headerMode: 'none'
+
+
+    },
+    Tabs: {
+        screen: Tabs,
+        navigationOptions:{
+            gesturesEnabled: false
+        }
+    },
+},
+    { headerMode: 'none'}
+)
+
+export const PhotoStack = StackNavigator({
+    Photos: {
+        screen: Photos,
+    },
+    PhotoDetails: {
+        screen: PhotoDetails
+    }
 })

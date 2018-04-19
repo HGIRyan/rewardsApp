@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ButtonPush = styled.TouchableOpacity`
-  height: 40;
+  height: 50;
   align-self: stretch;
   background-color: #fff;
   border-radius: 5;
@@ -14,6 +14,9 @@ export const ButtonPush = styled.TouchableOpacity`
   shadow-color: #000;
   shadowOpacity: .5;
   shadowRadius: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 // flex: 1,   this forces it to fill the whole screen/view height
 
