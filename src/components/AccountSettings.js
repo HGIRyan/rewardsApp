@@ -84,7 +84,7 @@ class Account extends Component {
                  <Image source=
                     {{ uri: !userPic ?  user.picture :   userPic.photoURI }}  
                     style={{width: 200, height: 200, borderRadius: 100}} />
-                        <View style={{ width: '70%', alignSelf: 'center', marginTop: -45 }}>
+                        <View style={{ width: '85%', height: 50, opacity: .6, alignSelf: 'center', marginTop: -45, backgroundColor: 'gray', borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
                             <Button onPress={() => this.goToPhotos() } color='white' title='change photo' />
                          </View>
                  </View>
@@ -148,6 +148,8 @@ const styles = {
         alignSelf: 'center',
         height: 200,
         width: 200,
+        overflow: 'hidden',
+        borderRadius: 100
     },
     names: {
         width: '47%'
