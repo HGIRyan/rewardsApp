@@ -9,31 +9,33 @@ import cartIcon from '../assests/cart.png';
 import { connect } from 'react-redux';
 import { addToCart } from '../../ducks/reducer';
 
+const initialState = {
+    selectedOption: '',
+    selectedMeat: '',
+    selectedSalsa: '',
+    selectedLettuce: 'normal',
+    selectedTomatoes: 'normal',
+    selectedBeans: 'normal',
+}
 
 // source for radio buttons https://github.com/ArnaudRinquin/react-native-radio-buttons/blob/master/examples/App.js
 
 class Order extends Component {
 
-    state = {
-        selectedOption: '',
-        // selectedOptionLabel: '',
-        selectedMeat: '',
-        selectedSalsa: '',
-        selectedLettuce: '',
-        selectedTomatoes: '',
-        selectedBeans:  '',
-    }
+    state = initialState
+    
+     // componentDidMount(){ this.props.user.length === 0 ? this.props.navigation.navigate( 'Login' ) : null }
 
     goToOrderConfirm = () => {
         console.log(this.props.navigation)
         this.props.navigation.navigate('OrderConfirm')
     }
 
-    addEntreeToCart(){
+    addEntreeToCart() {
         let details = {
             "Entree": this.state.selectedOption.label,
             "Price": this.state.selectedOption.value,
-            "Options":{
+            "Options": {
                 "Meat": this.state.selectedMeat,
                 "Salsa": this.state.selectedSalsa,
                 "Lettuce": this.state.selectedLettuce,
@@ -41,123 +43,122 @@ class Order extends Component {
             }
         }
         this.props.addToCart(details)
-            return this.goToOrderConfirm()
-
+        this.setState(initialState)
+        return this.goToOrderConfirm()
 
     }
 
-
     render() {
         //       Selecting and entree
-        const options = [ 
-            {label: "Taco     $3", value: 3}, 
-            {label: "Salad    $7", value: 7}, 
-            {label: "Nachos   $6", value: 6}, 
-            {label: "Burrito    $8", value: 8}
+        const options = [
+            { label: "Taco     $3", value: 3 },
+            { label: "Salad    $7", value: 7 },
+            { label: "Nachos   $6", value: 6 },
+            { label: "Burrito    $8", value: 8 }
         ];
 
         const extractText = (option) => option.label;
         const normalStyle = {
             color: 'red'
-          };
-          
-          const selectedStyle = {
+        };
+
+        const selectedStyle = {
             color: '#f80046',
             fontWeight: 'bold'
-          };
+        };
 
-          function setSelectedOption(selectedOption){
+        function setSelectedOption(selectedOption) {
             this.setState({
-              selectedOption: selectedOption,
-            //   selectedOptionLabel: selectedOption.label
+                selectedOption: selectedOption,
+                //   selectedOptionLabel: selectedOption.label
             });
-          }
-        
-          function renderOption1(option, selected, onSelect, index){
-            const style = selected ? { fontWeight: 'bold', color: '#084598', fontSize: 23, alignSelf: 'center'} : { color: '#007aff', fontSize: 19, alignSelf: 'center' };
-        
+        }
+
+        function renderOption1(option, selected, onSelect, index) {
+            const style = selected ? { fontWeight: 'bold', color: '#084598', fontSize: 23, alignSelf: 'center' } : { color: '#007aff', fontSize: 19, alignSelf: 'center' };
+
             return (
-              <TouchableOpacity onPress={onSelect} key={index}>
-                <Text style={style}>{option.label}</Text>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={onSelect} key={index}>
+                    <Text style={style}>{option.label}</Text>
+                </TouchableOpacity>
             );
-          }
-        
-          function renderContainer(optionNodes){
-            return <View style={{marginLeft: 10}} >{optionNodes}</View>;
-          }
-          // selecting a meat
+        }
 
-          const meat = ['none', 'chicken', 'steak', 'pork']
+        function renderContainer(optionNodes) {
+            return <View style={{ marginLeft: 10 }} >{optionNodes}</View>;
+        }
+        // selecting a meat
 
-          function setSelectedMeat(selectedMeat){
+        const meat = ['none', 'chicken', 'steak', 'pork']
+
+        function setSelectedMeat(selectedMeat) {
             this.setState({
-              selectedMeat: selectedMeat
+                selectedMeat: selectedMeat
             });
-          }
+        }
 
 
-          // selecting salsa
+        // selecting salsa
 
-          const salsa = ["none", "mild", "medium", "hot"];
+        const salsa = ["none", "mild", "medium", "hot"];
 
-          function setSelectedSalsa(selectedSalsa){
+        function setSelectedSalsa(selectedSalsa) {
             this.setState({
-              selectedSalsa: selectedSalsa
+                selectedSalsa: selectedSalsa
             });
-          }
-        
-          function renderOption(option, selected, onSelect, index){
+        }
+
+        function renderOption(option, selected, onSelect, index) {
             const sideStyle = selected ? { fontWeight: 'bold', color: '#084598', fontSize: 19 } : { color: '#007aff', fontSize: 18 };
-        
+
             return (
-              <TouchableOpacity onPress={onSelect} key={index}>
-                <Text style={sideStyle}>{option}</Text>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={onSelect} key={index}>
+                    <Text style={sideStyle}>{option}</Text>
+                </TouchableOpacity>
             );
-          }
-        
-          //  selecting lettuce
-          const sides = ['none', 'light', 'normal', 'extra']
+        }
 
-          function setselectedLettuce(selectedLettuce){
+        //  selecting lettuce
+        const sides = ['none', 'light', 'normal', 'extra']
+
+        function setselectedLettuce(selectedLettuce) {
             this.setState({
-              selectedLettuce: selectedLettuce
+                selectedLettuce: selectedLettuce
             });
-          }
+        }
 
-          // selecting tomatoes
-          function setselectedTomatoes(selectedTomatoes){
+        // selecting tomatoes
+        function setselectedTomatoes(selectedTomatoes) {
             this.setState({
-              selectedTomatoes: selectedTomatoes
+                selectedTomatoes: selectedTomatoes
             });
-          }
+        }
 
-          // selecting beans
+        // selecting beans
 
-          function setselectedBeans(selectedBeans){
+        function setselectedBeans(selectedBeans) {
             this.setState({
-              selectedBeans: selectedBeans
+                selectedBeans: selectedBeans
             });
-          }
+        }
 
 
 
-          console.log(this.state)
-        return(
+        console.log(this.state)
+        return (
             <MainContainer>
                 <View  >
                     <MainHeading >
                         Select an Entree
                     </MainHeading>
-                    <TouchableOpacity style={styles.cartIcon} onPress={ () => this.goToOrderConfirm() } >
-                        <Image source={cartIcon}  />
+                    <TouchableOpacity style={styles.cartIcon} onPress={() => this.goToOrderConfirm()} >
+                        <Image source={cartIcon} />
                     </TouchableOpacity>
                 </View>
 
                 {/* Selecting an entree */}
 
-                <DetailViewContainer style={{marginTop: -10}} >
+                <DetailViewContainer style={{ marginTop: -10 }} >
                     <View style={styles.flexView} >
                         {/* <RadioButtons
                             options={ options }
@@ -169,28 +170,28 @@ class Order extends Component {
                             renderContainer={ renderContainer }
                             /> */}
 
-                            <SegmentedControls
-                                selectedTint= {'red'}
-                                options={ options }
-                                onSelection={ setSelectedOption.bind(this) }
-                                selectedOption={ this.state.selectedOption.label }
-                                // renderOption={ renderOption1 }
-                                extractText={ (option) => option.label }
-                                />
-                            <AccountDetailsView>
-                                <BoldText>
-                                    Selected Entree:
+                        <SegmentedControls
+                            selectedTint={'red'}
+                            options={options}
+                            onSelection={setSelectedOption.bind(this)}
+                            selectedOption={this.state.selectedOption.label}
+                            // renderOption={ renderOption1 }
+                            extractText={(option) => option.label}
+                        />
+                        <AccountDetailsView>
+                            <BoldText>
+                                Selected Entree:
                                 </BoldText>
-                                <SubHeading>
-                                    {this.state.selectedOption.label || 'none'}
-                                </SubHeading>
-                            </AccountDetailsView>
-                        </View>
-                    </DetailViewContainer>
-                    <MainHeading >
-                      Choose your Toppings
+                            <SubHeading>
+                                {this.state.selectedOption.label || 'none'}
+                            </SubHeading>
+                        </AccountDetailsView>
+                    </View>
+                </DetailViewContainer>
+                <MainHeading >
+                    Choose your Toppings
                     </MainHeading>
-                    <DetailViewContainer style={{marginTop: -10}}>
+                <DetailViewContainer style={{ marginTop: -10 }}>
 
                     {/* selecting meat */}
 
@@ -199,104 +200,109 @@ class Order extends Component {
                             Meat:
                         </BoldText>
                         <View>
-                            <RadioButtons 
-                                options={ meat }
-                                onSelection={ setSelectedMeat.bind(this) }
-                                selectedOption={this.state.selectedMeat }
-                                renderOption={ renderOption }
-                                renderContainer={RadioButtons.getViewContainerRenderer({ flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                width: '80%',
-                                paddingTop: 15,
+                            <RadioButtons
+                                options={meat}
+                                onSelection={setSelectedMeat.bind(this)}
+                                selectedOption={this.state.selectedMeat}
+                                renderOption={renderOption}
+                                renderContainer={RadioButtons.getViewContainerRenderer({
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    width: '80%',
+                                    paddingTop: 15,
                                 })}
-                                />
+                            />
                         </View>
                     </View>
 
-                    
+
                     {/* Selecting Salsa */}
                     <View style={styles.linearView} >
-                        <BoldText style={{paddingTop: -5}}>
+                        <BoldText style={{ paddingTop: -5 }}>
                             Salsa:
                         </BoldText>
                         <View>
                             <RadioButtons
-                                options={ salsa }
-                                onSelection={ setSelectedSalsa.bind(this) }
-                                selectedOption={this.state.selectedSalsa }
-                                renderOption={ renderOption }
-                                renderContainer={RadioButtons.getViewContainerRenderer({ flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                width: '78%',
+                                options={salsa}
+                                onSelection={setSelectedSalsa.bind(this)}
+                                selectedOption={this.state.selectedSalsa}
+                                renderOption={renderOption}
+                                renderContainer={RadioButtons.getViewContainerRenderer({
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    width: '78%',
                                 })}
-                                />
+                            />
                         </View>
                     </View>
 
-                        {/* selecting lettuce */}
+                    {/* selecting lettuce */}
                     <View style={styles.linearView} >
-                        <BoldText style={{paddingTop: -5}}>
+                        <BoldText style={{ paddingTop: -5 }}>
                             Lettuce:
                         </BoldText>
                         <View>
                             <RadioButtons
-                                options={ sides }
-                                onSelection={ setselectedLettuce.bind(this) }
-                                selectedOption={this.state.selectedLettuce }
-                                renderOption={ renderOption }
-                                renderContainer={RadioButtons.getViewContainerRenderer({ flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                width: '78%',
-                                marginLeft: -5
+                                options={sides}
+                                onSelection={setselectedLettuce.bind(this)}
+                                selectedOption={this.state.selectedLettuce}
+                                renderOption={renderOption}
+                                renderContainer={RadioButtons.getViewContainerRenderer({
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    width: '78%',
+                                    marginLeft: -5
                                 })}
-                                />
+                            />
                         </View>
                     </View>
-                            
-                            {/* selecting tomatoes */}
+
+                    {/* selecting tomatoes */}
                     <View style={styles.linearView} >
-                        <BoldText style={{paddingTop: -5}}>
+                        <BoldText style={{ paddingTop: -5 }}>
                             Tomato:
                         </BoldText>
                         <View>
                             <RadioButtons
-                                options={ sides }
-                                onSelection={ setselectedTomatoes.bind(this) }
-                                selectedOption={this.state.selectedTomatoes }
-                                renderOption={ renderOption }
-                                renderContainer={RadioButtons.getViewContainerRenderer({ flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                width: '78%',
-                                marginLeft: -5
+                                options={sides}
+                                onSelection={setselectedTomatoes.bind(this)}
+                                selectedOption={this.state.selectedTomatoes}
+                                renderOption={renderOption}
+                                renderContainer={RadioButtons.getViewContainerRenderer({
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    width: '78%',
+                                    marginLeft: -5
                                 })}
-                                />
+                            />
                         </View>
                     </View>
 
-                        {/* selecting beans */}
+                    {/* selecting beans */}
                     <View style={styles.linearView} >
-                        <BoldText style={{paddingTop: -5}}>
+                        <BoldText style={{ paddingTop: -5 }}>
                             Beans:
                         </BoldText>
                         <View>
                             <RadioButtons
-                                options={ sides }
-                                onSelection={ setselectedBeans.bind(this) }
-                                selectedOption={this.state.selectedBeans }
-                                renderOption={ renderOption }
-                                renderContainer={RadioButtons.getViewContainerRenderer({ flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                width: '78%',
+                                options={sides}
+                                onSelection={setselectedBeans.bind(this)}
+                                selectedOption={this.state.selectedBeans}
+                                renderOption={renderOption}
+                                renderContainer={RadioButtons.getViewContainerRenderer({
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    width: '78%',
                                 })}
-                                />
+                            />
                         </View>
                     </View>
 
 
 
-                    </DetailViewContainer>
+                </DetailViewContainer>
                 <ButtonContainer>
-                    <Button onPress={ () => this.addEntreeToCart() }>
+                    <Button onPress={() => this.addEntreeToCart()}>
                         Add Item to Cart
                     </Button>
                 </ButtonContainer>
@@ -307,11 +313,11 @@ class Order extends Component {
 function mapStateToProps(state) {
     console.log(state)
     return {
-      user: state.user
+        user: state.user
     }
-  }
-  
-  export default connect(mapStateToProps, { addToCart })(Order);
+}
+
+export default connect(mapStateToProps, { addToCart })(Order);
 
 
 const styles = {

@@ -104,7 +104,7 @@ render() {
 
   return (
     <View style={styles.container}>
-      <ImageBackground style={{ width: '100%', height: '100%' }} source={taco} >
+      <ImageBackground style={{ width: '100%', height: '100%'}} source={taco} >
         <ButtonContainer>
           <SubHeading style={styles.header} >
             You are <BoldText>{loggedIn ? '' : 'NOT '}logged in.</BoldText>
@@ -138,8 +138,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    marginBottom: 20
+    backgroundColor: '#F5FCFF'
   },
   header: {
     fontSize: 20,

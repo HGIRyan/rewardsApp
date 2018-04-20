@@ -35,6 +35,8 @@ class OrderConfirm extends Component {
        })
 
     }
+    // componentDidMount(){ this.props.user.length === 0 ? this.props.navigation.navigate( 'Login' ) : null }
+
     goHome = () => {
         this.props.navigation.pop()
         this.props.navigation.navigate('Home')

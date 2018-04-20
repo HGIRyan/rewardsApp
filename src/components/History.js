@@ -9,7 +9,9 @@ import { MainContainer, DetailViewContainer, ColumnContainer } from '../../style
 
 
 class History extends Component {
- 
+
+    // componentDidMount(){ this.props.user.length === 0 ? this.props.navigation.navigate( 'Login' ) : null }
+
     render() {
         const user = this.props.user
         var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
@@ -26,7 +28,7 @@ class History extends Component {
                             <BoldText style={{marginLeft: 40}} >Total</BoldText>   
                             <BoldText>Points</BoldText>
                         </ColumnContainer>                  
-                    {user.orders.map((order, i) => {
+                    { user.length === 0 ? null : user.orders.map((order, i) => {
                         return (
 
                     //          <FlatList
@@ -41,13 +43,13 @@ class History extends Component {
                     // />
                     <ColumnContainer key={i}>
                             <SubHeading>
-                                {new Date(order.orderdate.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}
+                                { !order.orderdate ? null :  new Date(order.orderdate.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}
                             </SubHeading>
                             <SubHeading>
                              {order.total}   
                              </SubHeading>
                             <SubHeading>
-                             {parseInt(order.total.slice(1,8))}
+                             { !order.total ? null :  parseInt(order.total.slice(1,8))}
                              </SubHeading>
                     </ColumnContainer>
                             
