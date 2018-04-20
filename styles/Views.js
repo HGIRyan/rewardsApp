@@ -18,7 +18,7 @@ export const DetailViewContainer = styled.View`
     borderColor: #007aff;
     marginLeft: 35;
     marginRight: 35;
-    marginTop: 20px;
+    marginTop: 10px;
     boxShadow: 2px 2px;
     shadow-color: #000;
     shadowOpacity: .5;
