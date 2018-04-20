@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
+import { Image, View, Button } from 'react-native';
 import { connect } from 'react-redux';
-import Button  from './Button';
+// import Button  from './Button';
 import { updateUserInfo } from '../../ducks/reducer';
 import { AccountInput } from '../../styles/Inputs';
 import { MainHeading } from '../../styles/Texts';
@@ -80,11 +80,9 @@ class Account extends Component {
                  <Image source=
                     {{ uri: !userPic ?  user.picture :   userPic.photoURI }}  
                     style={{width: 200, height: 200, borderRadius: 100}} />
-                        <ButtonContainer style={{ width: '70%', alignSelf: 'center' }}>
-                            <Button onPress={() => this.goToPhotos() }>
-                              upload images
-                             </Button>
-                         </ButtonContainer>
+                        <View style={{ width: '70%', alignSelf: 'center', marginTop: -45 }}>
+                            <Button onPress={() => this.goToPhotos() } color='white' title='change photo' />
+                         </View>
                  </View>
                  <TwoButtonContainer>
                 <AccountInput 
