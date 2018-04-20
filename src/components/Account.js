@@ -17,9 +17,7 @@ class Account extends Component {
         email: '',
         DOB: ''
     }
-    componentWillMount() {
-        // this.props.getUserInfo()
-    }
+    // componentDidMount(){ this.props.user.length === 0 ? this.props.navigation.navigate( 'Login' ) : null }
 
     goToAccountSettings = () => {
         this.props.navigation.navigate('AccountSettings')
@@ -78,7 +76,7 @@ console.log('USER:',user)
 
                     <AccountDetailsView>
                         <BoldText>
-                            Date of Birth:
+                            Birthday:
                         </BoldText>
                         <SubHeading >
                             { !user.birthday ? null:

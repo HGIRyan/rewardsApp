@@ -28,12 +28,8 @@ class Account extends Component {
         newDOB: ''
     }
 
-    // componentWillMount = () => {
-    //     console.log(this.state.navigation)
-    //   this.props.navigation ? this.setState({picture: this.props.state}) : null 
-    // }
-    
-
+    // componentDidMount(){ this.props.user.length === 0 ? this.props.navigation.navigate( 'Login' ) : null }
+  
     goToAccount = () => {
         this.props.navigation.navigate('Account')
     }
@@ -90,28 +86,32 @@ class Account extends Component {
                  </View>
                  <TwoButtonContainer>
                 <AccountInput 
+                placeholder='First Name'
                     style={styles.names}
                     onChangeText={(newFirstName) => this.setState({newFirstName})}
                     value={user.firstname}>
                 </AccountInput>
                 <AccountInput 
+                    placeholder='Last Name'
                     style={styles.names}
                     onChangeText={(newLastName) => this.setState({newLastName})}
                     value={user.lastname }>
                 </AccountInput>
                 </TwoButtonContainer>
                 <AccountInput 
+                placeholder='Phone Number'
                     onChangeText={(newPhone) => this.setState({newPhone})}
                     value={user.phone}>
                 </AccountInput>
                 <AccountInput 
+                placeholder='Email'
                     onChangeText={(newEmail) => this.setState({newEmail})}
                     value={user.email}>
                 </AccountInput>
                 <AccountInput 
+                    placeholder='Birthday'
                     onChangeText={(newDOB) => this.setState({newDOB})}
-                    
-                    value={new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}>
+                    value={ !user.birthday ? null: new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}>
                 </AccountInput>
                 <TwoButtonContainer>
 
