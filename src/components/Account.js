@@ -80,7 +80,7 @@ console.log('USER:',user)
                         </BoldText>
                         <SubHeading >
                             { !user.birthday ? null:
-                            new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)
+                            new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options) 
                             
                             }
                         </SubHeading>

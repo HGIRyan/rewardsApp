@@ -43,7 +43,7 @@ class History extends Component {
                     // />
                     <ColumnContainer key={i}>
                             <SubHeading>
-                                { !order.orderdate ? null :  new Date(order.orderdate.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}
+                                { !order.orderdate ? null :  new Date(order.orderdate.slice(0,10)).toLocaleDateString('en-us', options) }
                             </SubHeading>
                             <SubHeading>
                              {order.total}   
