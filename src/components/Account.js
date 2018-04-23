@@ -33,6 +33,7 @@ console.log('USER:',user)
             <MainContainer> 
                 <MainHeading >
                     Account Information
+                    {this.props.user.pointbalance}
                 </MainHeading>
                 <View style={ styles.profilePic } >
                     <Image source=

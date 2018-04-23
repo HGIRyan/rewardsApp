@@ -15,7 +15,7 @@ class History extends Component {
     render() {
         const user = this.props.user
         var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
-
+console.log("user.orders.length",user.orders.length)
         return (
             <MainContainer>
                 <MainHeading style={styles.topMargin} >
@@ -28,7 +28,7 @@ class History extends Component {
                             <BoldText style={{marginLeft: 40}} >Total</BoldText>   
                             <BoldText>Points</BoldText>
                         </ColumnContainer>                  
-                    { user.length === 0 ? null : user.orders.map((order, i) => {
+                    { user.orders.length === 0 ? null : user.orders.map((order, i) => {
                         return (
 
                     //          <FlatList

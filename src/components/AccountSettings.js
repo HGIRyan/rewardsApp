@@ -50,9 +50,11 @@ class Account extends Component {
             "picture":!userPic ?  user.picture :   userPic.photoURI,
             "birthday":( this.state.newDOB.length >=1 ? this.state.newDOB : user.birthday ) ,
             "phone":( this.state.newPhone.length >=1 ? this.state.newPhone : user.phone ) ,
+            "auth_id": user.auth_id
         }
-        console.log('userUpdatedInfo', userUpdatedInfo)
-        this.props.updateUserInfo(userUpdatedInfo)
+        console.log('userUpdatedInfo INFO::', userUpdatedInfo)
+        console.log('userUpdatedInfo ID::', user.userid)
+        this.props.updateUserInfo(user.userid,userUpdatedInfo)
         .then( _=> {
             return this.goToAccount()
         })
