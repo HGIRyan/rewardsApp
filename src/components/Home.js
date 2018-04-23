@@ -26,14 +26,14 @@ class Home extends Component {
         <MainContainer >
             <ImageBackground style={{width: '100%', height: '100%'}} source={wood}>
                 <View style={{ position: 'relative' }}>
-                    <MainHeading style={{ }}>
-                        Abuelita's Comidas
+                    <MainHeading style={styles.title}>
+                        Abuelita's Tacos
                     </MainHeading>
                     <TouchableOpacity style={styles.logoutButton}>
                         <Button title='Logout' color='#007aff' onPress={() => this.goToLogin()} style={{fontSize: 12}} />
                     </TouchableOpacity>
                 </View>
-                <Image source={chicken} style={{ height: 300, width: 'auto' }}/>
+                <Image source={chicken} style={{ height: 280, width: 'auto' }}/>
                 <View style={styles.pointsView}>
                     <Text style={styles.points} >
                         Reward Points 
@@ -50,13 +50,12 @@ class Home extends Component {
 
 const styles = {
     title: {
+        textShadowOffset: {width: 4, height: 4},
+        textShadowRadius: 5,
+        textShadowColor: '#7a7b82',
         fontWeight: '800',
         marginTop: 50, 
-        fontSize: 30,
-        ...Platform.select({
-             ios: { fontFamily: 'Arial', }, 
-             android: { fontFamily: 'Roboto' }
-        })
+        fontSize: 45,
       },
     logoutButton: {
        position: 'absolute',
@@ -72,13 +71,13 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 90,
-        opacity: .7,
+        opacity: .6,
         position: 'absolute',
         bottom: 30
     },
     points: {
         color: '#007aff',
-        fontSize: 18,
+        fontSize: 20,
         alignSelf: 'center',
         fontWeight: '700'
     }
