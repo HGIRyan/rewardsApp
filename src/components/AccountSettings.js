@@ -44,7 +44,6 @@ class Account extends Component {
         const userPic = this.props.navigation.state.params
 
         let userUpdatedInfo = {
-            
             "firstname": ( this.state.newFirstName.length >=1 ? this.state.newFirstName : user.firstname ) ,
             "lastname":( this.state.newLastName.length >=1 ? this.state.newLastName : user.lastname ) ,
             "email":( this.state.newEmail.length >=1 ? this.state.newEmail : user.email ) ,
@@ -64,7 +63,7 @@ class Account extends Component {
         const user = this.props.user;
         var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
         const userPic = this.props.navigation.state.params
-        console.log("testStatus:", this.props.testStatus)
+        console.log("updateUserStatus:", this.props.updateUserStatus)
 
         // console.log(this.state.phone)
         // console.log(this.state.email)
@@ -137,7 +136,7 @@ class Account extends Component {
 function mapStateToProps(state) {
     return {
       user: state.user,
-      testStatus: state.testStatus
+      updateUserStatus: state.updateUserStatus
     }
   }
   
