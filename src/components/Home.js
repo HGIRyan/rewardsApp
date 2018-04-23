@@ -33,6 +33,11 @@ class Home extends Component {
                         <Button title='Logout' color='#0d6017' onPress={() => this.goToLogin()}/>
                     </TouchableOpacity>
                 </View>
+                <View style={styles.pointsView}>
+                    <Text style={styles.points} >
+                        Reward Points: {this.props.user.pointbalance}
+                    </Text>
+                </View>
             </ImageBackground>
         </MainContainer>
         )
@@ -44,6 +49,26 @@ const styles = {
        position: 'absolute',
        top: 13,
        right: 0,
+    },
+    pointsView: {
+        backgroundColor: 'white',
+        width: '60%',
+        height: 40,
+        alignSelf: 'center',
+        // marginTop: 500,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 15,
+        opacity: .5,
+        position: 'absolute',
+        bottom: 30
+    },
+    points: {
+        color: '#0d6017',
+        fontSize: 20,
+        alignSelf: 'center',
+        fontWeight: '700'
     }
 }
 
