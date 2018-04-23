@@ -6,7 +6,7 @@ export const MainContainer = styled.View`
     width: 100%;
     height: 100%
 `
-// #efeff4 - light blue, 4D3D2D brown, 
+// #efeff4 - light blue, 4D3D2D brown, #007aff main blue, #084598 bold blue, #0d6017 main green, #03380e dark
 
 // THIS IS THE BIG WHITE BOX CONTAINER THAT WRAPS MOST OF THE DISPLAYED DATA
 export const DetailViewContainer = styled.View`

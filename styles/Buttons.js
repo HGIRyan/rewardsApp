@@ -41,7 +41,7 @@ padding: 10px;
 export const HalfButtonPush = styled.TouchableOpacity`
   height: 40;
   background-color: ${props => props.cancel ? 'red' : '#23DD10'};
-  border-radius: 5;
+  border-radius: 30;
   width: 40%;
   border-width: 0;
   border-color: #fff;

@@ -1,82 +1,84 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Alert } from 'react-native';
+import { View, Text, Button, Alert, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { MainHeading, SubHeading, BoldText } from '../../styles/Texts';
+import { HalfButtonPush, HalfButtonText } from '../../styles/Buttons';
+import {removeFromCart, calculateCart} from '../../ducks/reducer';
 
 
 
 
 class OrderDetails extends Component {
     state = {
-        items: [
-            {
-                name: 'Tacos',
-                price: 8
-            },
-            {
-                name: 'Salad',
-                price: 9
-            },
-            {
-                name: 'Chips',
-                price: 6
-            }
-        ],
         cartTotal: 0
     }
 
-    componentDidMount() {
-        let cart = this.props.cart;
-        let total = 0;
-        for (let i = 0; i <= cart.length - 1; i++) {
-            total = total + cart[i].Price
-        }
-        this.setState({
-            cartTotal: total
-        })
+    componentDidMount = () => {
+      this.props.calculateCart(this.props.cart)
     }
-    removeFromCart(index) {
+    
+    componentWillReceiveProps() {
+        this.props.calculateCart(this.props.cart)
+    }
+      
+  
+
+    // calculateCart() {
+    //     console.log('calculating cart')
+    //     let cart = this.props.cart;
+    //     let total = 0;
+    //     for (let i = 0; i <= cart.length - 1; i++) {
+    //         total = total + cart[i].Price
+    //     }
+    //     this.setState({
+    //         cartTotal: total
+    //     })
+    // }
+    deleteFromCart(index) {
         let cart = this.props.cart;
         console.log(cart[index])
         Alert.alert(
             'Are You Sure?',
             `This will remove your ${cart[index].Entree} from your cart`,
             [
-                {text: 'DELETE', onPress: () => console.log('OK Pressed')},
+                {text: 'DELETE', onPress: () => this.props.removeFromCart(index)},
               {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
             ],
             { cancelable: false }
           )
+        //   .then(_=> {this.calculateCart()}
+        // )
     }
+
     render() {
         const cart = this.props.cart;
-        console.log('CartTotal:', this.state.cartTotal)
-
-
-        // const itemName = this.state.items.map((items, i) => {
-        //     return <Text style={ styles.orderDetailText } key={i}>{ `Item: ${items.name}    Price: $${items.price}` }</Text>
-        // })
-
-        // const itemPrice = this.state.items.map((items, i) => {
-        //     return <Text style={ styles.orderDetailText }key={i}>{ `n$${items.price}` }</Text>
-        // })
-
+        console.log('CartTotal:', this.props.cartTotal)
 
         return (
-            <View  >
+            <ScrollView  >
                 {cart.map((item, i) => {
                     return (
-                        <SubHeading key={i}>
-                            <BoldText>Entree: </BoldText> {item.Entree}
-                            <BoldText>Price: </BoldText> {item.Price} <Button onPress={_=>this.removeFromCart(i)} title="Delete" />
-                        </SubHeading>
+                        <View key={i} style={styles.orderContainer} >
+                            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                <BoldText>Entree: </BoldText> 
+                                <SubHeading style={styles.orderDetailText}>{item.Entree}</SubHeading>
+                            </View>
+                            <HalfButtonPush cancel onPress={_=>this.deleteFromCart(i)} 
+                               style={{ width: 30, height: 30, marginRight: 10 }}>
+                                <HalfButtonText style={{ fontSize: 12, marginTop: -2 }} >
+                                    X
+                                </HalfButtonText>
+                            </HalfButtonPush>
+                            
+                            
+                        </View>
                     )
                 }
                 )}
-                <BoldText>
-                    Cart Total: {this.state.cartTotal}
+                <BoldText style={{alignSelf: 'center'}} >
+                    Cart Total: ${this.props.cartTotal}
                 </BoldText>
-            </View>
+            </ScrollView>
         )
     }
 }
@@ -84,20 +86,30 @@ class OrderDetails extends Component {
 function mapStateToProps(state) {
     console.log(state)
     return {
-        cart: state.cart
+        cart: state.cart,
+        cartTotal: state.cartTotal
     }
 }
 
-export default connect(mapStateToProps)(OrderDetails);
+export default connect(mapStateToProps, {removeFromCart, calculateCart})(OrderDetails);
 
 const styles = {
     orderContainer: {
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     orderDetailText: {
-        alignSelf: 'center',
-        color: '#084598',
-        marginLeft: 5
+        // alignSelf: 'center',
+        // color: '#084598',
+        marginLeft: 0,
+    },
+    deleteButton: {
+        backgroundColor: 'green',
+        textAlign: 'center',
+        marginTop: 15,
+        padding: 30,
+        height: 30,
+        width: 50
     }
 }
