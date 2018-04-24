@@ -77,7 +77,7 @@ const styles = {
     },
     points: {
         color: '#007aff',
-        fontSize: 20,
+        fontSize: 22,
         alignSelf: 'center',
         fontWeight: '700'
     }
