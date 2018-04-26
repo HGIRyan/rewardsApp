@@ -29,12 +29,8 @@ class Account extends Component {
         newDOB: ''
     }
 
-    // componentWillMount = () => {
-    //     console.log(this.state.navigation)
-    //   this.props.navigation ? this.setState({picture: this.props.state}) : null 
-    // }
-    
-
+    // componentDidMount(){ this.props.user.length === 0 ? this.props.navigation.navigate( 'Login' ) : null }
+  
     goToAccount = () => {
         this.props.navigation.navigate('Account')
     }
@@ -49,16 +45,17 @@ class Account extends Component {
         const userPic = this.props.navigation.state.params
 
         let userUpdatedInfo = {
-            
             "firstname": ( this.state.newFirstName.length >=1 ? this.state.newFirstName : user.firstname ) ,
             "lastname":( this.state.newLastName.length >=1 ? this.state.newLastName : user.lastname ) ,
             "email":( this.state.newEmail.length >=1 ? this.state.newEmail : user.email ) ,
             "picture":!userPic ?  user.picture :   userPic.photoURI,
             "birthday":( this.state.newDOB.length >=1 ? this.state.newDOB : user.birthday ) ,
             "phone":( this.state.newPhone.length >=1 ? this.state.newPhone : user.phone ) ,
+            "auth_id": user.auth_id
         }
-        console.log('userUpdatedInfo', userUpdatedInfo)
-        this.props.updateUserInfo(userUpdatedInfo)
+        console.log('userUpdatedInfo INFO::', userUpdatedInfo)
+        console.log('userUpdatedInfo ID::', user.userid)
+        this.props.updateUserInfo(user.userid,userUpdatedInfo)
         .then( _=> {
             return this.goToAccount()
         })
@@ -69,7 +66,7 @@ class Account extends Component {
         const user = this.props.user;
         var options = { month: 'long', day: 'numeric' , year: 'numeric'  };
         const userPic = this.props.navigation.state.params
-        console.log("testStatus:", this.props.testStatus)
+        console.log("updateUserStatus:", this.props.updateUserStatus)
 
         // console.log(this.state.phone)
         // console.log(this.state.email)
@@ -95,28 +92,32 @@ class Account extends Component {
                  </View>
                  <TwoButtonContainer>
                 <AccountInput 
+                placeholder='First Name'
                     style={styles.names}
                     onChangeText={(newFirstName) => this.setState({newFirstName})}
                     value={user.firstname}>
                 </AccountInput>
                 <AccountInput 
+                    placeholder='Last Name'
                     style={styles.names}
                     onChangeText={(newLastName) => this.setState({newLastName})}
                     value={user.lastname }>
                 </AccountInput>
                 </TwoButtonContainer>
                 <AccountInput 
+                placeholder='Phone Number'
                     onChangeText={(newPhone) => this.setState({newPhone})}
                     value={user.phone}>
                 </AccountInput>
                 <AccountInput 
+                placeholder='Email'
                     onChangeText={(newEmail) => this.setState({newEmail})}
                     value={user.email}>
                 </AccountInput>
                 <AccountInput 
+                    placeholder='Birthday'
                     onChangeText={(newDOB) => this.setState({newDOB})}
-                    
-                    value={new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}>
+                    value={ !user.birthday ? null: new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)}>
                 </AccountInput>
                 <TwoButtonContainer>
 
@@ -142,7 +143,7 @@ class Account extends Component {
 function mapStateToProps(state) {
     return {
       user: state.user,
-      testStatus: state.testStatus
+      updateUserStatus: state.updateUserStatus
     }
   }
   

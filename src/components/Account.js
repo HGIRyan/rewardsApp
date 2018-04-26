@@ -17,9 +17,7 @@ class Account extends Component {
         email: '',
         DOB: ''
     }
-    componentWillMount() {
-        // this.props.getUserInfo()
-    }
+    // componentDidMount(){ this.props.user.length === 0 ? this.props.navigation.navigate( 'Login' ) : null }
 
     goToAccountSettings = () => {
         this.props.navigation.navigate('AccountSettings')
@@ -35,6 +33,7 @@ console.log('USER:',user)
             <MainContainer> 
                 <MainHeading >
                     Account Information
+                    {this.props.user.pointbalance}
                 </MainHeading>
                 <View style={ styles.profilePic } >
                     <Image source=
@@ -78,11 +77,11 @@ console.log('USER:',user)
 
                     <AccountDetailsView>
                         <BoldText>
-                            Date of Birth:
+                            Birthday:
                         </BoldText>
                         <SubHeading >
                             { !user.birthday ? null:
-                            new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options)
+                            new Date( user.birthday.slice(0,10).split('-').join(',')).toLocaleDateString('en-us', options) 
                             
                             }
                         </SubHeading>

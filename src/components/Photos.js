@@ -7,7 +7,7 @@ export default class Photos extends Component{
         photos: [],
         photoURI: ''
     }
-
+    
     componentDidUpdate = (prevProps, prevState) => {
       if (this.state.photoURI !== '') {
         this.props.navigation.navigate('AccountSettings', { photoURI: this.state.photoURI })
@@ -17,6 +17,7 @@ export default class Photos extends Component{
     componentWillMount = () => {
       this._handleButtonPress();
     }
+    // componentDidMount(){ this.props.user.length === 0 ? this.props.navigation.navigate( 'Login' ) : null }
     
      _handleButtonPress = () => {
         CameraRoll.getPhotos({

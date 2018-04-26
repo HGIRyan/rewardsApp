@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from 'react-native';
 import {  MainHeading } from '../../styles/Texts';
 
@@ -22,6 +23,17 @@ class Waiting extends Component {
     console.log('redirect is running')
     if( this.props.getUserInfoStatus === 'SEND_USER_INFO_FULFILLED'){
       this.props.navigation.navigate('Home')
+    }else if ( this.props.getUserInfoStatus === 'SEND_USER_INFO_REJECTED' ) {
+      
+      Alert.alert(
+        'ERROR!',
+        `There was an error loging you in. Please try again.`,
+        [
+            {text: 'OK', onPress: () => this.props.navigation.navigate('Login')},
+        ],
+        { cancelable: false }
+      )
+      
     }
   }
   render() {

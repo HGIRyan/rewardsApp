@@ -35,6 +35,8 @@ class OrderConfirm extends Component {
        })
 
     }
+    // componentDidMount(){ this.props.user.length === 0 ? this.props.navigation.navigate( 'Login' ) : null }
+
     goHome = () => {
         this.props.navigation.pop()
         this.props.navigation.navigate('Home')
@@ -42,7 +44,7 @@ class OrderConfirm extends Component {
 
     confirmOrder(paymentMethod,date) {
         let body = {
-            "userid": 1,
+            "userid": this.props.user.userid,
             "total": (paymentMethod === 'Rewards'?    parseInt(this.state.cartTotal * 10):this.state.cartTotal),
             "orderdate": date,
             "paymentType": paymentMethod

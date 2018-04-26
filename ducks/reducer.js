@@ -14,14 +14,19 @@ const initialState = {
 
 // --ACTION CONSTRAINTS--
 const GET_USER = 'GET_USER';
-const UPDATE_USER = 'UPDATE_USER';
-const NEW_ORDER = 'NEW_ORDER';
+    const UPDATE_USER = 'UPDATE_USER';
+    const NEW_ORDER = 'NEW_ORDER';
+
 
 const ADD_TO_CART = 'ADD_TO_CART';
 const ITEMS_IN_CART = 'ITEMS_IN_CART';
 const SEND_USER_INFO = 'SEND_USER_INFO';
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 const CALCULATE_CART = 'CALCULATE_CART';
+const ADD_TO_CART = 'ADD_TO_CART';
+const ITEMS_IN_CART = 'ITEMS_IN_CART';
+const SEND_USER_INFO = 'SEND_USER_INFO';
+
 
 // --ACTION CREATORS--
 export function getUserInfo() {
@@ -33,6 +38,7 @@ export function getUserInfo() {
     }
 }
 export function updateUserInfo(id, body) {
+    console.log('ID::', id, "BODY::", body)
     const updatedUserData = axios.put(BASEURL + `/api/update/user/${id}`, body)
         .then(res => {
             return res.data
@@ -71,8 +77,9 @@ export function calculateCart(cart) {
     }
 }
 
+
 export function sendUserInfo(body) {
-    const userData = axios.post( BASEURL + `/api/user/info/`,body)
+    const userData = axios.post(BASEURL + `/api/user/info/`, body)
         .then(res => {
             return res.data
         })
@@ -93,20 +100,21 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { user: action.payload });
 
         case UPDATE_USER + '_FULFILLED':
-            return Object.assign({}, state, { user: action.payload , updateUserStatus: action.type});
+            return Object.assign({}, state, { user: action.payload, updateUserStatus: action.type });
         case UPDATE_USER + '_PENDING':
-            return Object.assign({}, state, {updateUserStatus: action.type});
+            return Object.assign({}, state, { updateUserStatus: action.type });
         case UPDATE_USER + '_REJECTED':
-            return Object.assign({}, state, {updateUserStatus: action.type});
+            return Object.assign({}, state, { updateUserStatus: action.type });
 
         case NEW_ORDER + '_FULFILLED':
-            return Object.assign({}, state, { usersOrder: action.payload });
+            return Object.assign({}, state, { user: action.payload });
 
         case ADD_TO_CART:
             let newItem = state.cart.slice()
             newItem.push(action.payload)
             console.log(newItem)
             return Object.assign({}, state, { cart: newItem });
+
 
         case REMOVE_FROM_CART:
             let removedItem = state.cart.slice()

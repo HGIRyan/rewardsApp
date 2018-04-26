@@ -11,9 +11,8 @@ import chicken from '../assests/chicken.jpg';
 
 class Home extends Component {
     state={}
-    componentWillMount() {
-        // this.props.getUserInfo()
-    }
+    // componentDidMount(){ this.props.user.length === 0 ? this.props.navigation.navigate( 'Login' ) : null }
+
 
     goToLogin = () => {
         console.log('logout button is firing')
