@@ -5,6 +5,7 @@ import { BASEURL } from '../secrets.js';
 const initialState = {
     user: [],
     cart: [],
+    cartTotal: 0,
     usersOrder: [],
     userInfo: {},
     getUserInfoStatus: '',
@@ -16,9 +17,16 @@ const GET_USER = 'GET_USER';
     const UPDATE_USER = 'UPDATE_USER';
     const NEW_ORDER = 'NEW_ORDER';
 
-    const ADD_TO_CART = 'ADD_TO_CART';
-    const ITEMS_IN_CART = 'ITEMS_IN_CART';
-    const SEND_USER_INFO = 'SEND_USER_INFO';
+
+const ADD_TO_CART = 'ADD_TO_CART';
+const ITEMS_IN_CART = 'ITEMS_IN_CART';
+const SEND_USER_INFO = 'SEND_USER_INFO';
+const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+const CALCULATE_CART = 'CALCULATE_CART';
+const ADD_TO_CART = 'ADD_TO_CART';
+const ITEMS_IN_CART = 'ITEMS_IN_CART';
+const SEND_USER_INFO = 'SEND_USER_INFO';
+
 
 // --ACTION CREATORS--
 export function getUserInfo() {
@@ -56,6 +64,19 @@ export function addToCart(val) {
         payload: val
     }
 }
+export function removeFromCart(val) {
+    return {
+        type: REMOVE_FROM_CART,
+        payload: val
+    }
+}
+export function calculateCart(cart) {
+    return {
+        type: CALCULATE_CART,
+        payload: cart
+    }
+}
+
 
 export function sendUserInfo(body) {
     const userData = axios.post(BASEURL + `/api/user/info/`, body)
@@ -95,13 +116,27 @@ export default function reducer(state = initialState, action) {
             return Object.assign({}, state, { cart: newItem });
 
 
-        case SEND_USER_INFO + '_PENDING':
-            return Object.assign({}, state, { getUserInfoStatus: action.type });
-        case SEND_USER_INFO + '_REJECTED':
-            return Object.assign({}, state, { getUserInfoStatus: action.type });
-        case SEND_USER_INFO + '_FULFILLED':
-            return Object.assign({}, state, { user: action.payload, getUserInfoStatus: action.type });
+        case REMOVE_FROM_CART:
+            let removedItem = state.cart.slice()
+            removedItem.splice(action.payload, 1)
+            return Object.assign({}, state, { cart: removedItem });
+        
+        case CALCULATE_CART:
+        console.log('calculating total')
+        let cart = state.cart;
+        let total = 0;
+        for (let i = 0; i <= cart.length - 1; i++) {
+            total = total + cart[i].Price
+        }
+       return Object.assign({}, state, {cartTotal: total})
 
+            case SEND_USER_INFO + '_PENDING':
+                return Object.assign({}, state, {getUserInfoStatus: action.type  });
+            case SEND_USER_INFO + '_REJECTED':
+                return Object.assign({}, state, { getUserInfoStatus: action.type  });
+            case SEND_USER_INFO + '_FULFILLED':
+               return Object.assign({}, state, { user: action.payload,  getUserInfoStatus: action.type  });
+            
         default:
             return state;
     }

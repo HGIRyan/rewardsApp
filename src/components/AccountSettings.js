@@ -9,6 +9,7 @@ import { TwoButtonContainer, ButtonContainer } from '../../styles/Buttons';
 import HalfButton from './HalfButton';
 import { HalfButtonPush, HalfButtonText } from '../../styles/Buttons';
 import { MainContainer } from '../../styles/Views';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 // import profilePic from '../assests/profile.png';
 
 
@@ -73,10 +74,14 @@ class Account extends Component {
 // resource for react native inputs: https://facebook.github.io/react-native/docs/textinput.html#onsubmitediting
 
         return(
-            <MainContainer>
+            <KeyboardAwareScrollView
+            style={{ backgroundColor: '#4c69a5' }}
+            resetScrollToCoords={{ x: 0, y: 0 }}
+            contentContainerStyle={styles.container}
+            scrollEnabled={false}>                
                 <MainHeading >
                      Edit Account Information
-                 </MainHeading>
+                </MainHeading>
                  <View style={ styles.profilePic } >
                  <Image source=
                     {{ uri: !userPic ?  user.picture :   userPic.photoURI }}  
@@ -131,7 +136,7 @@ class Account extends Component {
                         </HalfButtonText>
                     </HalfButtonPush>
                 </TwoButtonContainer>
-            </MainContainer>
+            </KeyboardAwareScrollView>
         )
     }
 }
@@ -145,6 +150,11 @@ function mapStateToProps(state) {
   export default connect(mapStateToProps, { updateUserInfo })(Account);
 
 const styles = {
+    container: {
+        backgroundColor: '#efeff4',
+        width: '100%',
+        height: '100%'
+    },
     profilePic: {
         alignSelf: 'center',
         height: 200,

@@ -65,8 +65,8 @@ class OrderConfirm extends Component {
                 <MainHeading >
                     Order Details
                  </MainHeading>
-                <DetailViewContainer >
-                    <OrderDetails />
+                <DetailViewContainer style={{maxHeight: 330}} >
+                    <OrderDetails style={{maxHeight: 330}}/>
                     {/* <Text>pointbalance:{this.props.user.pointbalance}
                     can use points?: {this.props.user.pointbalance / 10 >= this.state.cartTotal? 'true':'false'}
                     rewards cart total: {parseInt(this.state.cartTotal * 10)}
