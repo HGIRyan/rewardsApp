@@ -14,7 +14,7 @@ import { RNCamera } from 'react-native-camera';
 
 
 
-class CameraBack extends Component {
+class Camera extends Component {
     state = {
         lastPic: '',
         frontOrBack: 'back'
@@ -31,48 +31,48 @@ class CameraBack extends Component {
             { cancelable: true }
         )
     }
-    switchCamera(){
+    switchCamera() {
         console.log('Switching Camera from', this.state.frontOrBack)
-        if(this.state.frontOrBack === 'back'){
+        if (this.state.frontOrBack === 'back') {
             this.setState({
-                frontOrBack:'front'
+                frontOrBack: 'front'
             })
-        }else{
+        } else {
             this.setState({
-                frontOrBack:'back'
+                frontOrBack: 'back'
             })
         }
         console.log('Camera Switched To', this.state.frontOrBack)
     }
-   
+
     render() {
-        let frontOrBack = this.state.frontOrBack; 
+        let frontOrBack = this.state.frontOrBack;
         return (
             <View style={styles.container}>
-               {this.state.frontOrBack === 'front'? 
-                <RNCamera
-                ref={ref => {
-                    this.camera = ref;
-                }}
-                style={styles.preview}
-                type={RNCamera.Constants.Type.front}
-                flashMode={RNCamera.Constants.FlashMode.off}
-                permissionDialogTitle={'Permission to use camera'}
-                permissionDialogMessage={'We need your permission to use your camera phone'}
-            />
-            :
-            <RNCamera
-            ref={ref => {
-                this.camera = ref;
-            }}
-            style={styles.preview}
-            type={RNCamera.Constants.Type.back}
-            flashMode={RNCamera.Constants.FlashMode.off}
-            permissionDialogTitle={'Permission to use camera'}
-            permissionDialogMessage={'We need your permission to use your camera phone'}
-        />
-               }
-               
+                {this.state.frontOrBack === 'front' ?
+                    <RNCamera
+                        ref={ref => {
+                            this.camera = ref;
+                        }}
+                        style={styles.preview}
+                        type={RNCamera.Constants.Type.front}
+                        flashMode={RNCamera.Constants.FlashMode.off}
+                        permissionDialogTitle={'Permission to use camera'}
+                        permissionDialogMessage={'We need your permission to use your camera phone'}
+                    />
+                    :
+                    <RNCamera
+                        ref={ref => {
+                            this.camera = ref;
+                        }}
+                        style={styles.preview}
+                        type={RNCamera.Constants.Type.back}
+                        flashMode={RNCamera.Constants.FlashMode.off}
+                        permissionDialogTitle={'Permission to use camera'}
+                        permissionDialogMessage={'We need your permission to use your camera phone'}
+                    />
+                }
+
                 <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center', }}>
                     {this.state.lastPic === '' ? null :
                         <Image source=
@@ -115,7 +115,7 @@ class CameraBack extends Component {
     };
 
 }
-export default CameraBack;
+export default Camera;
 
 const styles = StyleSheet.create({
     container: {
