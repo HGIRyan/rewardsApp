@@ -44,7 +44,7 @@ class OrderConfirm extends Component {
 
     confirmOrder(paymentMethod,date) {
         let body = {
-            "userid": 1,
+            "userid": this.props.user.userid,
             "total": (paymentMethod === 'Rewards'?    parseInt(this.state.cartTotal * 10):this.state.cartTotal),
             "orderdate": date,
             "paymentType": paymentMethod
